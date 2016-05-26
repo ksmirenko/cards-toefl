@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name" translatable="false">Cards for the TOEFL® Test</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add_card">Add Card</string>
+    <string name="new_module">New Module</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="action_delete_category">Delete category</string>
+    <string name="hint_category_name">category name</string>
+    <string name="hint_category_lang">language code</string>
+    <string name="hint_card_front">front side</string>
+    <string name="hint_card_back">back side (in category\'s primary lang)</string>
+    <string name="help">help</string>
+    <string name="tap_to_flip">tap to flip cards</string>
+    <string name="arrow_down">down arrow</string>
+    <string name="arrow_up">up arrow</string>
+    <string name="arrow_right">right arrow</string>
+    <string name="arrow_left">left arrow</string>
+    <string name="text_card_hint_down">Didn\'t\nknow it :(</string>
+    <string name="text_card_hint_up">Knew it!</string>
+    <string name="text_card_hint_right">Back</string>
+    <string name="text_card_hint_left">Skip</string>
+    <string name="button_knew">Knew it!</string>
+    <string name="button_notknew">Didn\'t know it</string>
+    <string name="front_side_first">Front side first</string>
+    <string name="back_side_first">Back side first</string>
+    <string name="random_order">Random order</string>
+    <string name="only_unanswered">Only unanswered last time</string>
+    <string name="no_unanswered_cards">No unanswered cards; showing all</string>
+    <string name="view_all">View All</string>
+    <string name="hint_filter_dictionary">Search</string>
+    <string name="quit">Quit</string>
+    <string name="cards_answered">"Cards answered: "</string>
+    <string name="about">About</string>
+    <string name="text_about">© 2016 Kirill Smirenko\n\nThe project is open-source (Apache License 2.0).\nhttps://github.com/ksmirenko/cards-toefl\n\nTOEFL is a registered trademark of Educational Testing Service (ETS) in the United States and other countries. The \'Cards for the TOEFL® Test\' app and Kirill Smirenko are not endorsed or approved by ETS.\n\nIcons from https://icons8.com/ were used in the app.\nSome content was taken from <a href="http://english4real.com">english4real.com</a> with owner\'s permission.</string>
+</resources>
