@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:compat="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_view_dictionary"
+        android:icon="@drawable/ic_open_book_black_24dp"
+        android:title="@string/view_dictionary"
+        compat:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/action_module_settings"
-        android:icon="@drawable/ic_settings_applications_white_24dp"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/action_settings"
         compat:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_about"
-        android:icon="@drawable/ic_info_white_24dp"
+        android:icon="@drawable/ic_info_outline_black_24dp"
         android:title="@string/about"
-        compat:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/action_view_dictionary"
-        android:icon="@drawable/ic_open_book_white_24dp"
-        android:title="@string/view_dictionary"
         compat:showAsAction="ifRoom"/>
 </menu>

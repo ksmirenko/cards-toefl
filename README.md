@@ -18,6 +18,6 @@ Some content was taken from [english4real.com](http://english4real.com) with own
 
 Some icons were taken from [icons8.com](https://icons8.com/) ([CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/)).
 
-Some icons were made by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) ([CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)).
+Some icons made by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com) ([CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)).
 
 Some assets were created with the [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html) ([CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)).

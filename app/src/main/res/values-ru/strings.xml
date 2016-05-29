@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_add_card">Добавить карточку</string>
-    <string name="action_delete_category">Удалить категорию</string>
+    <string name="about">О приложении</string>
     <string name="action_settings">Настройки</string>
-    <string name="arrow_down">стрелка вниз</string>
-    <string name="arrow_left">стрелка влево</string>
-    <string name="arrow_right">стрелка вправо</string>
-    <string name="arrow_up">стрелка вверх</string>
     <string name="back_side_first">С оборотной стороны</string>
     <string name="button_knew">Знаю!</string>
     <string name="button_notknew">Не знаю</string>
+    <string name="cards_answered">Отвечено: </string>
     <string name="dictionary">Словарь</string>
     <string name="front_side_first">С лицевой стороны</string>
-    <string name="help">помощь</string>
-    <string name="hint_card_back">оборотная сторона (на основном языке категории)</string>
-    <string name="hint_card_front">лицевая сторона</string>
-    <string name="hint_category_lang">код языка</string>
-    <string name="hint_category_name">имя категории</string>
     <string name="hint_filter_dictionary">Поиск</string>
-    <string name="new_module">Создать модуль</string>
     <string name="no_unanswered_cards">Нет неотвеченных; открыты все</string>
     <string name="only_unanswered">Только неотвеченные</string>
     <string name="quit">Выход</string>
     <string name="random_order">Перемешать</string>
     <string name="tap_to_flip">карточки переворачиваются\nпо касанию</string>
-    <string name="text_card_hint_down">Не знаю :(</string>
-    <string name="text_card_hint_left">Пропустить</string>
-    <string name="text_card_hint_right">Назад</string>
-    <string name="text_card_hint_up">Знаю!</string>
+    <string name="text_about">© 2016 Кирилл Смиренко\n\nЭто проект с открытым исходным кодом (Apache License 2.0). <a href="https://github.com/ksmirenko/cards-toefl">Исходный код</a>\n\nTOEFL является зарегистрированной торговой маркой компании "Эдьюкейшионал Тестинг Сервис" (Educational Testing Service) в Соединённых Штатах Америки и других странах. Приложение \'Cards for the TOEFL® Test\' и Кирилл Смиренко не имеют отношения к ETS и не поддерживаются ей.\n\nИспользуются иконки с сайта https://icons8.com/.\nЧасть контента взята с сайта <a href="http://english4real.com">english4real.com</a> с разрешения автора.\n\nЧасть контента взята с сайта <a href="http://english4real.com">english4real.com</a> с разрешения автора.\n\nИспользуются иконки с сайта <a href="https://icons8.com">icons8.com</a> (CC BY-ND 3.0).\nЧасть иконок сделана <a href="http://www.freepik.com">Freepik</a> и взята с ресурса <a href="http://www.flaticon.com">Flaticon</a> (CC 3.0 BY).\nЧасть ресурсов создана с помощью <a href="https://romannurik.github.io/AndroidAssetStudio/index.html">Android Asset Studio</a> (CC BY 3.0).</string>
     <string name="view_dictionary">Словарь</string>
-    <string name="cards_answered">Отвечено:</string>
-    <string name="about">О приложении</string>
-    <string name="text_about">© 2016 Кирилл Смиренко\n\nЭто проект с открытым исходным кодом (Apache License 2.0).\nhttps://github.com/ksmirenko/cards-toefl\n\nTOEFL является зарегистрированной торговой маркой компании Educational Testing Service (ETS) в Соединённых Штатах Америки и других странах. Приложение \'Cards for the TOEFL® Test\' и Кирилл Смиренко не имеют отношения к ETS и не поддерживаются ETS.\n\nИспользуются иконки с сайта https://icons8.com/.\nЧасть контента взята с сайта <a href="http://english4real.com">english4real.com</a> с разрешения автора.</string>
 </resources>

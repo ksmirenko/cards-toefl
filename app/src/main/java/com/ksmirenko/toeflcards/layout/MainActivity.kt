@@ -3,10 +3,16 @@ package com.ksmirenko.toeflcards.layout
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.text.Html
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 
 import com.ksmirenko.toeflcards.FlexiDatabaseProvider
 import com.ksmirenko.toeflcards.R
@@ -43,16 +49,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_view_dictionary) {
-            // launcing dictionary activity
-            val dictIntent = Intent(this, DictionaryActivity::class.java)
-            dictIntent.putExtra(DictionaryActivity.ARG_CATEGORY_ID, categoryId)
-            startActivity(dictIntent)
-            return true
+        when (item.itemId) {
+            R.id.action_view_dictionary -> {
+                // launcing dictionary activity
+                val dictIntent = Intent(this, DictionaryActivity::class.java)
+                dictIntent.putExtra(DictionaryActivity.ARG_CATEGORY_ID, categoryId)
+                startActivity(dictIntent)
+                return true
+            }
+            R.id.action_module_settings -> {
+                // TODO: module settings
+                return true
+            }
+            R.id.action_about -> {
+                showAboutDialog()
+                return true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
         }
-        else {
-            return super.onOptionsItemSelected(item)
-        }
+    }
+
+    fun showAboutDialog() {
+        val d = AlertDialog.Builder(appContext)
+            .setPositiveButton(android.R.string.ok, null)
+            .setMessage(R.string.text_about)
+            .setTitle(R.string.app_name)
+            .create();
+        d.show();
+        (d.findViewById(android.R.id.message) as TextView).movementMethod =
+            LinkMovementMethod.getInstance()
     }
 
     companion object {
