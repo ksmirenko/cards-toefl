@@ -28,7 +28,7 @@
     <string name="text_card_hint_left">Пропустить</string>
     <string name="text_card_hint_right">Назад</string>
     <string name="text_card_hint_up">Знаю!</string>
-    <string name="view_all">Просмотреть все</string>
+    <string name="view_dictionary">Словарь</string>
     <string name="cards_answered">Отвечено:</string>
     <string name="about">О приложении</string>
     <string name="text_about">© 2016 Кирилл Смиренко\n\nЭто проект с открытым исходным кодом (Apache License 2.0).\nhttps://github.com/ksmirenko/cards-toefl\n\nTOEFL является зарегистрированной торговой маркой компании Educational Testing Service (ETS) в Соединённых Штатах Америки и других странах. Приложение \'Cards for the TOEFL® Test\' и Кирилл Смиренко не имеют отношения к ETS и не поддерживаются ETS.\n\nИспользуются иконки с сайта https://icons8.com/.\nЧасть контента взята с сайта <a href="http://english4real.com">english4real.com</a> с разрешения автора.</string>
