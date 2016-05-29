@@ -31,10 +31,6 @@ class MainActivity : AppCompatActivity() {
             FlexiDatabaseProvider.init(appContext!!, dbFilename)
         }
 
-        // set up top action bar
-        val toolbar = findViewById(R.id.toolbar_activity_category) as Toolbar?
-        setSupportActionBar(toolbar)
-
         if (savedInstanceState == null) {
             val fragment = ModuleListFragment()
             supportFragmentManager.beginTransaction().add(R.id.category_detail_container, fragment).commit()

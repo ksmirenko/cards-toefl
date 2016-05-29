@@ -21,13 +21,10 @@
         <activity
             android:name="com.ksmirenko.toeflcards.layout.CardActivity"
             android:parentActivityName=".layout.MainActivity">
-            <!--<intent-filter>
-                <action android:name="com.ksmirenko.toeflcards.layout.CardActivity" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>-->
         </activity>
         <activity
             android:name="com.ksmirenko.toeflcards.layout.DictionaryActivity"
+            android:label="@string/dictionary"
             android:parentActivityName=".layout.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>

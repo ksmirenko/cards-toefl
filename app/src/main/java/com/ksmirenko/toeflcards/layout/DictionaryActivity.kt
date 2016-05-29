@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_dictionary.*
  * @author Kirill Smirenko
  */
 class DictionaryActivity : AppCompatActivity() {
-
     private var adapter: CursorAdapter? = null // FIXME: make it non-nullable
 
     @SuppressWarnings("ConstantConditions")
@@ -32,15 +31,12 @@ class DictionaryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dictionary)
 
         // setting up top action bar
-        setSupportActionBar(toolbar_activity_dictionary)
-        supportActionBar!!.setTitle(R.string.dictionary)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // filling the main list view
         val categoryId = intent.getLongExtra(ARG_CATEGORY_ID, 0)
         val db = FlexiDatabaseProvider.db
         val cursor = db.getDictionary(categoryId)
-        //adapter = new DictionaryCursorAdapter(this, cursor);
         adapter = SimpleCursorAdapter(
             this,
             R.layout.listview_item_dictionary,

@@ -40,23 +40,23 @@ class CardContainerFragment : Fragment() {
         private val dummyCallbacks = DummyCallbacks()
     }
 
-    private var callbacks : Callbacks = dummyCallbacks
+    private var callbacks: Callbacks = dummyCallbacks
     private var isShowingBack = false
 
-    override fun onAttach(context : Context) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks
     }
 
     // this is needed to support lower APIs
     @Suppress("OverridingDeprecatedMember", "DEPRECATION")
-    override fun onAttach(activity : Activity) {
+    override fun onAttach(activity: Activity) {
         super.onAttach(activity)
         callbacks = activity as Callbacks
     }
 
-    override fun onCreateView(inflater : LayoutInflater?, container : ViewGroup?,
-                              savedInstanceState : Bundle?) : View? {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.fragment_cards_container, container, false)
         val args = arguments
         isShowingBack = args.getBoolean(ARG_IS_BACK_FIRST, false)
@@ -65,9 +65,9 @@ class CardContainerFragment : Fragment() {
         val cardFragment = if (isShowingBack) CardBackFragment(callbacks) else CardFrontFragment(callbacks)
         cardFragment.arguments = args // small workaround
         childFragmentManager
-                .beginTransaction()
-                .add(R.id.layout_card_container, cardFragment)
-                .commit()
+            .beginTransaction()
+            .add(R.id.layout_card_container, cardFragment)
+            .commit()
         // adding event handler
         val gestureDetector = GestureDetector(activity, CardGestureDetector(flipCard))
         val layout = rootView.findViewById(R.id.layout_card_container)
@@ -86,19 +86,22 @@ class CardContainerFragment : Fragment() {
         val newFragment = if (isShowingBack) CardFrontFragment(callbacks) else CardBackFragment(callbacks)
         newFragment.arguments = arguments
         childFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.animator.card_flip_right_in, R.animator.card_flip_right_out,
-                        R.animator.card_flip_left_in, R.animator.card_flip_left_out
-                )
-                .replace(R.id.layout_card_container, newFragment)
-                .commit()
+            .beginTransaction()
+            .setCustomAnimations(
+                R.animator.card_flip_right_in, R.animator.card_flip_right_out,
+                R.animator.card_flip_left_in, R.animator.card_flip_left_out
+            )
+            .replace(R.id.layout_card_container, newFragment)
+            .commit()
         isShowingBack = !isShowingBack
     }
 
-    class CardFrontFragment(val callbacks : Callbacks) : Fragment() {
-        override fun onCreateView(inflater : LayoutInflater?, container : ViewGroup?,
-                                  savedInstanceState : Bundle?) : View? {
+    class CardFrontFragment(val callbacks: Callbacks) : Fragment() {
+        constructor() : this(DummyCallbacks()) {
+        }
+
+        override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                                  savedInstanceState: Bundle?): View? {
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
             rootView.setBackgroundColor(ContextCompat.getColor(MainActivity.appContext, R.color.background))
             val textView = rootView.findViewById(R.id.textview_cardview_mainfield) as TextView
@@ -111,9 +114,12 @@ class CardContainerFragment : Fragment() {
         }
     }
 
-    class CardBackFragment(val callbacks : Callbacks) : Fragment() {
-        override fun onCreateView(inflater : LayoutInflater?, container : ViewGroup?,
-                                  savedInstanceState : Bundle?) : View? {
+    class CardBackFragment(val callbacks: Callbacks) : Fragment() {
+        constructor() : this(DummyCallbacks()) {
+        }
+
+        override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                                  savedInstanceState: Bundle?): View? {
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
             rootView.setBackgroundColor(ContextCompat.getColor(MainActivity.appContext, R.color.backgroundDark))
             val textView = rootView.findViewById(R.id.textview_cardview_mainfield) as TextView
@@ -127,22 +133,22 @@ class CardContainerFragment : Fragment() {
     }
 
     class DummyCallbacks() : Callbacks {
-        override fun onCardButtonClicked(knowIt : Boolean) {
+        override fun onCardButtonClicked(knowIt: Boolean) {
         }
 
         override fun onQuitButtonClicked() {
         }
     }
 
-    private class CardGestureDetector(val onTapAction : () -> Unit) : GestureDetector.OnGestureListener {
-        override fun onScroll(p0 : MotionEvent?, p1 : MotionEvent?, p2 : Float, p3 : Float) : Boolean = false
+    private class CardGestureDetector(val onTapAction: () -> Unit) : GestureDetector.OnGestureListener {
+        override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean = false
 
-        override fun onFling(p0 : MotionEvent?, p1 : MotionEvent?, p2 : Float, p3 : Float) : Boolean = false
+        override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean = false
 
-        override fun onShowPress(p0 : MotionEvent?) {
+        override fun onShowPress(p0: MotionEvent?) {
         }
 
-        override fun onLongPress(p0 : MotionEvent?) {
+        override fun onLongPress(p0: MotionEvent?) {
         }
 
         /*
@@ -150,16 +156,16 @@ class CardContainerFragment : Fragment() {
           If set to false, card flipping won't work.
           Have no idea what to do with this thing.
         */
-        override fun onDown(e : MotionEvent) = true
+        override fun onDown(e: MotionEvent) = true
 
-        override fun onSingleTapUp(e : MotionEvent?) : Boolean {
+        override fun onSingleTapUp(e: MotionEvent?): Boolean {
             onTapAction()
             return true
         }
     }
 
     interface Callbacks {
-        fun onCardButtonClicked(knowIt : Boolean)
+        fun onCardButtonClicked(knowIt: Boolean)
         fun onQuitButtonClicked()
     }
 }
