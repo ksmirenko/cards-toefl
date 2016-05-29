@@ -115,10 +115,10 @@ public class CardActivity extends AppCompatActivity
 
         // storing user result in an intent and closing the activity
         Intent intent = new Intent();
-        intent.putExtra(CategoryFragment.RES_ARG_CARDS_UNANSWERED_CNT, cardsUnansweredIds.size());
-        intent.putExtra(CategoryFragment.RES_ARG_CARDS_UNANSWERED, StringUtils.INSTANCE.listToString(cardsUnansweredIds));
-        intent.putExtra(CategoryFragment.RES_ARG_CARDS_TOTAL_CNT, cardsTotalCount);
-        intent.putExtra(CategoryFragment.RES_ARG_MODULE_ID, moduleId);
+        intent.putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED_CNT, cardsUnansweredIds.size());
+        intent.putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED, StringUtils.INSTANCE.listToString(cardsUnansweredIds));
+        intent.putExtra(ModuleListFragment.RES_ARG_CARDS_TOTAL_CNT, cardsTotalCount);
+        intent.putExtra(ModuleListFragment.RES_ARG_MODULE_ID, moduleId);
         setResult(RESULT_OK, intent);
         finish();
     }

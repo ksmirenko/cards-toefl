@@ -16,7 +16,7 @@ import com.ksmirenko.toeflcards.R;
  *
  * @author Kirill Smirenko
  */
-public class CategoryActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     public static final String ARG_CATEGORY_NAME = "cat_name";
     // content shock: toefl-specific constants in core
     private static final String TOEFL_DB_NAME = "toeflcards.db";
@@ -27,7 +27,7 @@ public class CategoryActivity extends AppCompatActivity {
      * Context for the fragments to work normally.
      */
     public static Context getAppContext() {
-        return CategoryActivity.context;
+        return MainActivity.context;
     }
 
     private static Context context;
@@ -38,13 +38,13 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CategoryActivity.context = CategoryActivity.this;
+        MainActivity.context = MainActivity.this;
         setContentView(R.layout.activity_category);
 
         // loading or initializing category ID and database
         // in any odd situation, show TOEFL category
-        categoryId = getIntent().getLongExtra(CategoryFragment.ARG_CATEGORY_ID, TOEFL_CATEGORY_ID);
-        String categoryName = getIntent().getStringExtra(CategoryActivity.ARG_CATEGORY_NAME);
+        categoryId = getIntent().getLongExtra(ModuleListFragment.ARG_CATEGORY_ID, TOEFL_CATEGORY_ID);
+        String categoryName = getIntent().getStringExtra(MainActivity.ARG_CATEGORY_NAME);
         if (categoryName == null || categoryName.equals("")) {
             categoryName = TOEFL_CATEGORY_NAME;
         }
@@ -61,8 +61,8 @@ public class CategoryActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // manually adding category fragment if the state is null
             Bundle arguments = new Bundle();
-            arguments.putLong(CategoryFragment.ARG_CATEGORY_ID, categoryId);
-            CategoryFragment fragment = new CategoryFragment();
+            arguments.putLong(ModuleListFragment.ARG_CATEGORY_ID, categoryId);
+            ModuleListFragment fragment = new ModuleListFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.category_detail_container, fragment)

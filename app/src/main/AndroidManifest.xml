@@ -11,7 +11,7 @@
         android:fullBackupContent="@xml/backupscheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.ksmirenko.toeflcards.layout.CategoryActivity">
+            android:name=".layout.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,11 +19,11 @@
         </activity>
         <activity
             android:name="com.ksmirenko.toeflcards.layout.CardActivity"
-            android:parentActivityName="com.ksmirenko.toeflcards.layout.CategoryActivity">
+            android:parentActivityName=".layout.MainActivity">
         </activity>
         <activity
             android:name="com.ksmirenko.toeflcards.layout.DictionaryActivity"
-            android:parentActivityName="com.ksmirenko.toeflcards.layout.CategoryActivity"
+            android:parentActivityName=".layout.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>

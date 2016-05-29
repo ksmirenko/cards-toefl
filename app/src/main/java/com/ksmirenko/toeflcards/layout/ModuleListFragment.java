@@ -23,7 +23,7 @@ import com.ksmirenko.toeflcards.adapters.ModuleCursorAdapter;
  *
  * @author Kirill Smirenko
  */
-public class CategoryFragment extends Fragment {
+public class ModuleListFragment extends Fragment {
     /**
      * The fragment argument representing the category ID that this fragment represents.
      */
@@ -43,7 +43,7 @@ public class CategoryFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CategoryFragment() {
+    public ModuleListFragment() {
     }
 
     @Override
@@ -54,7 +54,7 @@ public class CategoryFragment extends Fragment {
         if (arguments.containsKey(ARG_CATEGORY_ID)) {
             // loading cursor to the list of modules
             categoryId = arguments.getLong(ARG_CATEGORY_ID);
-            // TODO: load db either from instance or from meta-data in CategoryActivity
+            // TODO: load db either from instance or from meta-data in MainActivity
             final FlexiDatabase db = FlexiDatabaseProvider.INSTANCE.getDb();
             Cursor cursor = db.getModules(categoryId);
             modulesAdapter = new ModuleCursorAdapter(getContext(), cursor);
