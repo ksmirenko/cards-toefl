@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/textview_catscr_module_name"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:minHeight="@dimen/height_list_item_oneline"
-          android:paddingLeft="@dimen/padding_list_item_leftright"
-          android:paddingRight="@dimen/padding_list_item_leftright"
-          android:paddingTop="@dimen/padding_list_item_topbottom_small"
-          android:paddingBottom="@dimen/padding_list_item_topbottom_small"
-          android:singleLine="false"
-          android:gravity="center_vertical"
-          android:textColor="@color/textPrimary"
-          android:textSize="@dimen/text_size_list_item_primary"
-          android:textStyle="bold"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/height_list_item_oneline"
+                android:paddingTop="@dimen/padding_list_item_topbottom_small">
+
+    <ImageView
+        android:id="@+id/icon_catscr_module"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/padding_list_item_leftright"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/textview_catscr_module_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/padding_list_item_topbottom_small"
+        android:paddingStart="72dp"
+        android:paddingEnd="@dimen/padding_list_item_leftright"
+        android:paddingTop="@dimen/padding_list_item_topbottom_small"
+        android:singleLine="false"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_list_item_primary"
+        android:textStyle="bold"/>
+</RelativeLayout>
+
+
