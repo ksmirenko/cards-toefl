@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             FlexiDatabaseProvider.init(appContext!!, dbFilename)
         }
 
+        // add module list fragment
         if (savedInstanceState == null) {
             val fragment = ModuleListFragment()
             supportFragmentManager.beginTransaction().add(R.id.category_detail_container, fragment).commit()
@@ -50,13 +51,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_view_dictionary -> {
-                // launcing dictionary activity
-                val dictIntent = Intent(this, DictionaryActivity::class.java)
-                dictIntent.putExtra(DictionaryActivity.ARG_CATEGORY_ID, categoryId)
-                startActivity(dictIntent)
-                return true
-            }
             R.id.action_module_settings -> {
                 // TODO: module settings
                 return true

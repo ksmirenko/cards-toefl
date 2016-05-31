@@ -37,6 +37,9 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
 
+        // hide action bar
+        supportActionBar?.hide()
+
         // showing "tap to flip cards" message
         val toast = Toast.makeText(this, R.string.tap_to_flip, Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 50)

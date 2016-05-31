@@ -38,11 +38,10 @@ class ModuleListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.fragment_modules_list, container, false)
+        val listView = rootView.listview_modules
 
         // filling the list with modules and setting up onClick
         if (modulesAdapter != null) {
-//            val listView = rootView.findViewById(R.id.listview_modules) as ListView
-            val listView = rootView.listview_modules
             listView.adapter = modulesAdapter
             listView.setOnItemClickListener { parent, view, position, id ->
                 // preparing module settings dialog
@@ -70,6 +69,16 @@ class ModuleListFragment : Fragment() {
                     startActivityForResult(detailIntent, RES_REQUEST_CODE)
                 }.show()
             }
+        }
+
+        // attach the floating action button
+        val fab = rootView.fab_dictionary
+        fab.attachToListView(listView)
+        fab.setOnClickListener {
+            // launch dictionary activity
+            val dictIntent = Intent(context, DictionaryActivity::class.java)
+            dictIntent.putExtra(DictionaryActivity.ARG_CATEGORY_ID, categoryId)
+            startActivity(dictIntent)
         }
 
         return rootView
