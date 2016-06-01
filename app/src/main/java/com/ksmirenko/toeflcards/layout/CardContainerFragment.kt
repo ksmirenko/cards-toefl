@@ -18,15 +18,14 @@
 package com.ksmirenko.toeflcards.layout
 
 import android.app.Activity
-import android.app.DialogFragment
 import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.*
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+
 import com.ksmirenko.toeflcards.R
 import kotlinx.android.synthetic.main.fragment_tap_hint.view.*
 

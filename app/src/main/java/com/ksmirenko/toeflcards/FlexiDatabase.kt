@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
-import com.ksmirenko.toeflcards.StringUtils
 import com.ksmirenko.toeflcards.data.Card
 import com.ksmirenko.toeflcards.data.CardPack
 import com.ksmirenko.toeflcards.data.Category
@@ -159,7 +158,7 @@ class FlexiDatabase(context : Context, dbname : String) :
         val db = readableDatabase
         // This SQL call should be conformed with CategoryQuery
         val sql = "SELECT * FROM ${CategoryEntry.TABLE_NAME} " +
-            "ORDER BY ${CategoryEntry.COLUMN_NAME_LANGUAGE}, ${CategoryEntry.COLUMN_NAME_NAME}${COLLATION}"
+            "ORDER BY ${CategoryEntry.COLUMN_NAME_LANGUAGE}, ${CategoryEntry.COLUMN_NAME_NAME}$COLLATION"
         return db.rawQuery(sql, null)
     }
 
@@ -189,7 +188,7 @@ class FlexiDatabase(context : Context, dbname : String) :
             CategoryEntry.COLUMN_NAME_NAME + "=?",
             arrayOf(pack.categoryName),
             null, null, null)
-        var categoryId : Long
+        val categoryId : Long
         if (categoryCursor != null && categoryCursor.moveToFirst())
             categoryId = categoryCursor.getString(0).toLong()
         else {

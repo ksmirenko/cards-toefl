@@ -1,7 +1,6 @@
 package com.ksmirenko.toeflcards
 
 import android.widget.FilterQueryProvider
-import com.ksmirenko.toeflcards.FlexiDatabase
 
 /**
  * Filter query provider for Dictionary.

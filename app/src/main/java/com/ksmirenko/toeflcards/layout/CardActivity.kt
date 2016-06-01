@@ -1,17 +1,10 @@
 package com.ksmirenko.toeflcards.layout
 
-import java.util.ArrayList
-
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.database.Cursor
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 
 import com.ksmirenko.toeflcards.FlexiDatabase
@@ -20,6 +13,7 @@ import com.ksmirenko.toeflcards.R
 import com.ksmirenko.toeflcards.StringUtils
 import com.ksmirenko.toeflcards.adapters.CardsPagerAdapter
 import kotlinx.android.synthetic.main.activity_card.*
+import java.util.ArrayList
 
 /**
  * Activity for card viewing, i.e. main purpose of the app.

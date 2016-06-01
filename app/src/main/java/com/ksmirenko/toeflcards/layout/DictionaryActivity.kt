@@ -1,21 +1,21 @@
 package com.ksmirenko.toeflcards.layout
 
-import android.R.id
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.*
-import android.widget.*
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.CursorAdapter
+import android.widget.ListView
+import android.widget.SearchView
+import android.widget.SimpleCursorAdapter
 
 import com.ksmirenko.toeflcards.DictionaryFilterQueryProvider
 import com.ksmirenko.toeflcards.FlexiDatabase
 import com.ksmirenko.toeflcards.FlexiDatabaseProvider
 import com.ksmirenko.toeflcards.R
-import kotlinx.android.synthetic.main.activity_dictionary.*
 
 /**
  * Dictionary activity - category selection screen.
