@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about">О приложении</string>
-    <string name="action_settings">Настройки</string>
+    <string name="settings">Настройки</string>
     <string name="back_side_first">С оборотной стороны</string>
     <string name="button_knew">Знаю!</string>
     <string name="button_notknew">Не знаю</string>

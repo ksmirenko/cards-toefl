@@ -17,17 +17,18 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ksmirenko.toeflcards.layout.CardActivity"
+            android:name=".layout.CardActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".layout.MainActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.ksmirenko.toeflcards.layout.DictionaryActivity"
+            android:name=".layout.DictionaryActivity"
             android:label="@string/dictionary"
             android:launchMode="singleTop"
             android:parentActivityName=".layout.MainActivity"
@@ -35,9 +36,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable_dict"/>
+        </activity>
+        <activity
+            android:name=".layout.ModuleSettingsActivity"
+            android:label="@string/settings"
+            android:launchMode="singleTop"
+            android:parentActivityName=".layout.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 
@@ -38,12 +39,14 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         // hide action bar
         supportActionBar?.hide()
 
-        // extracting arguments
-        val intent = intent
+        // extracting module ID
         moduleId = intent.getLongExtra(ARG_MODULE_ID, 0)
-        val isBackFirst = intent.getBooleanExtra(ARG_IS_BACK_FIRST, false)
-        val isRandom = intent.getBooleanExtra(ARG_IS_RANDOM, true)
-        val isUnansweredOnly = intent.getBooleanExtra(ARG_IS_UNANSWERED_ONLY, false)
+
+        // extracting preferences
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val isBackFirst = prefs.getBoolean(getString(R.string.pref_back_first), false)
+        val isRandom = prefs.getBoolean(getString(R.string.pref_shuffle), true)
+        val isUnansweredOnly = prefs.getBoolean(getString(R.string.pref_unanswered), true)
 
         // obtaining cards
         val db = FlexiDatabaseProvider.db
@@ -110,8 +113,5 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
     companion object {
         // intent arguments
         val ARG_MODULE_ID = "module_id"
-        val ARG_IS_BACK_FIRST = "back_first"
-        val ARG_IS_RANDOM = "random"
-        val ARG_IS_UNANSWERED_ONLY = "unanswered"
     }
 }

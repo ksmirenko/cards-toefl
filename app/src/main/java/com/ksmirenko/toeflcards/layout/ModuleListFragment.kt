@@ -44,30 +44,10 @@ class ModuleListFragment : Fragment() {
         if (modulesAdapter != null) {
             listView.adapter = modulesAdapter
             listView.setOnItemClickListener { parent, view, position, id ->
-                // preparing module settings dialog
-                val moduleId = id
-                val context = view.context
-                val inflateService = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val dlgView = inflateService.inflate(R.layout.fragment_module_settings, null, false)
-                dlgView.switch_dlg_module_whichside.setOnCheckedChangeListener { buttonView, isChecked ->
-                    dlgView.textview_dlg_module_whichside.setText(
-                        if (isChecked) R.string.back_side_first else R.string.front_side_first
-                    )
-                }
-                // showing module settings dialog dialog
-                AlertDialog.Builder(context).setView(dlgView).setPositiveButton("OK") { dialog, id ->
-                    dialog.dismiss()
-                    // launching card view activity
-                    val detailIntent = Intent(getContext(), CardActivity::class.java)
-                    detailIntent.putExtra(CardActivity.ARG_MODULE_ID, moduleId)
-                    detailIntent.putExtra(CardActivity.ARG_IS_BACK_FIRST,
-                        dlgView.switch_dlg_module_whichside.isChecked)
-                    detailIntent.putExtra(CardActivity.ARG_IS_RANDOM,
-                        dlgView.cb_dlg_module_random.isChecked)
-                    detailIntent.putExtra(CardActivity.ARG_IS_UNANSWERED_ONLY,
-                        dlgView.cb_dlg_module_unanswered.isChecked)
-                    startActivityForResult(detailIntent, RES_REQUEST_CODE)
-                }.show()
+                // launch card view activity
+                val detailIntent = Intent(context, CardActivity::class.java)
+                detailIntent.putExtra(CardActivity.ARG_MODULE_ID, id)
+                startActivityForResult(detailIntent, RES_REQUEST_CODE)
             }
         }
 

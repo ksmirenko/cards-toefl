@@ -1,7 +1,10 @@
 package com.ksmirenko.toeflcards.layout
 
+import android.app.DialogFragment
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceFragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.method.LinkMovementMethod
@@ -51,7 +54,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_module_settings -> {
-                // TODO: module settings
+                val prefsIntent = Intent(appContext, ModuleSettingsActivity::class.java)
+                startActivity(prefsIntent)
                 return true
             }
             R.id.action_about -> {
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showAboutDialog() {
+    private fun showAboutDialog() {
         val d = AlertDialog.Builder(appContext)
             .setPositiveButton(android.R.string.ok, null)
             .setMessage(R.string.text_about)
