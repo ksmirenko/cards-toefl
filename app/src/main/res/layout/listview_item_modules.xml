@@ -26,8 +26,7 @@
         android:paddingTop="@dimen/padding_list_item_topbottom_small"
         android:singleLine="false"
         android:textColor="@color/textPrimary"
-        android:textSize="@dimen/text_size_list_item_primary"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/text_size_list_item_primary"/>
 </RelativeLayout>
 
 

@@ -95,7 +95,8 @@ class ModuleListFragment : Fragment() {
             db.updateModuleProgress(moduleId, unanswered)
             Toast.makeText(
                 context,
-                getString(R.string.cards_answered) + (totalCount - unansweredCount) + "/" + totalCount,
+                getString(R.string.cards_answered) + " "
+                    + (totalCount - unansweredCount) + "/" + totalCount,
                 Toast.LENGTH_SHORT).show()
         }
     }

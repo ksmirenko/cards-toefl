@@ -5,7 +5,7 @@
     <string name="back_side_first">Back side first</string>
     <string name="button_knew">Knew it!</string>
     <string name="button_notknew">Didn\'t know it</string>
-    <string name="cards_answered">Cards answered: </string>
+    <string name="cards_answered">Cards answered:</string>
     <string name="dictionary">Dictionary</string>
     <string name="front_side_first">Front side first</string>
     <string name="hint_filter_dictionary">Search</string>
@@ -13,7 +13,8 @@
     <string name="only_unanswered">Only unanswered last time</string>
     <string name="quit">Quit</string>
     <string name="random_order">Random order</string>
-    <string name="tap_to_flip">tap to flip cards</string>
+    <string name="tap_to_flip">Tap the screen\nto flip a card</string>
     <string name="text_about">© 2016 Kirill Smirenko\n\nThis project is open-source (Apache License 2.0). <a href="https://github.com/ksmirenko/cards-toefl">Source code</a>\n\nTOEFL is a registered trademark of Educational Testing Service (ETS) in the United States and other countries. The \'Cards for the TOEFL® Test\' app and Kirill Smirenko are not endorsed or approved by ETS.\n\nSome content was taken from <a href="http://english4real.com">english4real.com</a> with owner\'s permission.\n\nSome icons were taken from <a href="https://icons8.com">icons8.com</a> (CC BY-ND 3.0).\nSome icons made by <a href="http://www.freepik.com">Freepik</a> from <a href="http://www.flaticon.com">Flaticon</a> (CC 3.0 BY).\nSome assets were created with the <a href="https://romannurik.github.io/AndroidAssetStudio/index.html">Android Asset Studio</a> (CC BY 3.0).</string>
     <string name="view_dictionary">Dictionary</string>
+    <string name="got_it">Got it</string>
 </resources>

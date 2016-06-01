@@ -18,14 +18,17 @@
 package com.ksmirenko.toeflcards.layout
 
 import android.app.Activity
+import android.app.DialogFragment
 import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.*
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.ksmirenko.toeflcards.R
+import kotlinx.android.synthetic.main.fragment_tap_hint.view.*
 
 /**
  * Fragment that represents a single viewed card.
@@ -39,6 +42,9 @@ class CardContainerFragment : Fragment() {
 
         private val dummyCallbacks = DummyCallbacks()
     }
+
+    private val HINT_PREFS_NAME = "ShouldShowHint"
+    private val HINT_FRAGMENT_TAG = "HintFragment"
 
     private var callbacks: Callbacks = dummyCallbacks
     private var isShowingBack = false
@@ -74,7 +80,27 @@ class CardContainerFragment : Fragment() {
         layout.setOnTouchListener { view, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
         }
+
         return rootView
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // if launched for the first time, show "tap to flip" hint fragment
+        val prefs = activity.getSharedPreferences(HINT_PREFS_NAME, 0)
+        if (prefs.getBoolean(HINT_PREFS_NAME, true)) {
+            val hintFragment = TapHintFragment {
+                childFragmentManager
+                    .beginTransaction()
+                    .remove(childFragmentManager.findFragmentByTag(HINT_FRAGMENT_TAG))
+                    .commit()
+            }
+            childFragmentManager
+                .beginTransaction()
+                .add(R.id.layout_card_container, hintFragment, HINT_FRAGMENT_TAG)
+                .commit()
+            prefs.edit().putBoolean(HINT_PREFS_NAME, false).apply()
+        }
     }
 
     override fun onDetach() {
@@ -128,6 +154,21 @@ class CardContainerFragment : Fragment() {
             rootView.findViewById(R.id.button_cardview_notknow).setOnClickListener { callbacks.onCardButtonClicked(false) }
             val iconQuit = rootView.findViewById(R.id.icon_cardview_quit) as ImageView
             iconQuit.setOnClickListener { callbacks.onQuitButtonClicked() }
+            return rootView
+        }
+    }
+
+    class TapHintFragment(val dismissCallback: (() -> Unit)?) : Fragment() {
+        constructor() : this(null) {
+        }
+
+        override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+                                  savedInstanceState: Bundle?): View? {
+            val rootView = inflater!!.inflate(R.layout.fragment_tap_hint, container, false)
+            rootView.button_tap_hint_dismiss.setOnClickListener {
+                //activity.fragmentManager.beginTransaction().remove(this).commit()
+                dismissCallback?.invoke()
+            }
             return rootView
         }
     }

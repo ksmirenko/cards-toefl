@@ -4,10 +4,14 @@ import java.util.ArrayList
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 import com.ksmirenko.toeflcards.FlexiDatabase
@@ -39,11 +43,6 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
 
         // hide action bar
         supportActionBar?.hide()
-
-        // showing "tap to flip cards" message
-        val toast = Toast.makeText(this, R.string.tap_to_flip, Toast.LENGTH_SHORT)
-        toast.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 50)
-        toast.show()
 
         // extracting arguments
         val intent = intent

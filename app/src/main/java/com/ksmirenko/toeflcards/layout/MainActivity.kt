@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             val fragment = ModuleListFragment()
             supportFragmentManager.beginTransaction().add(R.id.category_detail_container, fragment).commit()
         }
+
+        // TODO: remove debug code
+        // clear prefs to show hint dialog
+//        getSharedPreferences("ShouldShowHint", 0).edit().clear().apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
