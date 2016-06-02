@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.ksmirenko.toeflcards.layout
+package io.github.ksmirenko.toeflcards.layout
 
 import android.app.Activity
 import android.app.Fragment
@@ -26,7 +26,7 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 
-import com.ksmirenko.toeflcards.R
+import io.github.ksmirenko.toeflcards.R
 import kotlinx.android.synthetic.main.fragment_tap_hint.view.*
 
 /**

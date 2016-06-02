@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards.layout
+package io.github.ksmirenko.toeflcards.layout
 
 import android.app.SearchManager
 import android.content.Context
@@ -12,10 +12,10 @@ import android.widget.ListView
 import android.widget.SearchView
 import android.widget.SimpleCursorAdapter
 
-import com.ksmirenko.toeflcards.DictionaryFilterQueryProvider
-import com.ksmirenko.toeflcards.FlexiDatabase
-import com.ksmirenko.toeflcards.FlexiDatabaseProvider
-import com.ksmirenko.toeflcards.R
+import io.github.ksmirenko.toeflcards.DictionaryFilterQueryProvider
+import io.github.ksmirenko.toeflcards.FlexiDatabase
+import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
+import io.github.ksmirenko.toeflcards.R
 
 /**
  * Dictionary activity - category selection screen.

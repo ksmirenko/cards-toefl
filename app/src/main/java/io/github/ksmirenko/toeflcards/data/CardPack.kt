@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards.data
+package io.github.ksmirenko.toeflcards.data
 
 /**
  * Pack of cards to be added to DB that can be

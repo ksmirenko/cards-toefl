@@ -1,10 +1,8 @@
-package com.ksmirenko.toeflcards.layout
+package io.github.ksmirenko.toeflcards.layout
 
-import android.app.DialogFragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceFragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.method.LinkMovementMethod
@@ -12,8 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 
-import com.ksmirenko.toeflcards.FlexiDatabaseProvider
-import com.ksmirenko.toeflcards.R
+import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
+import io.github.ksmirenko.toeflcards.R
 
 /**
  * Activity for category screen.
@@ -21,13 +19,12 @@ import com.ksmirenko.toeflcards.R
  * @author Kirill Smirenko
  */
 class MainActivity : AppCompatActivity() {
-    private val categoryId = 1L
     private val dbFilename = "toeflcards.db"
 
     @SuppressWarnings("ConstantConditions")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainActivity.appContext = this@MainActivity
+        appContext = this@MainActivity
         setContentView(R.layout.activity_main)
 
         // init database

@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards
+package io.github.ksmirenko.toeflcards
 
 /**
  * Text data conversion utils.

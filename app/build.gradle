@@ -22,7 +22,7 @@ android {
     buildToolsVersion '23.0.3'
 
     defaultConfig {
-        applicationId "com.ksmirenko.toeflcards"
+        applicationId "io.github.ksmirenko.toeflcards"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1

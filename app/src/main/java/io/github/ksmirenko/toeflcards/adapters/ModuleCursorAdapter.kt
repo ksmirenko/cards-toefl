@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards.adapters
+package io.github.ksmirenko.toeflcards.adapters
 
 import android.content.Context
 import android.database.CharArrayBuffer
@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import android.widget.CursorAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.ksmirenko.toeflcards.FlexiDatabase
-import com.ksmirenko.toeflcards.R
+
+import io.github.ksmirenko.toeflcards.FlexiDatabase
+import io.github.ksmirenko.toeflcards.R
 import kotlinx.android.synthetic.main.listview_item_modules.view.*
 
 /**

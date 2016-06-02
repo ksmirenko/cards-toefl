@@ -1,16 +1,17 @@
-package com.ksmirenko.toeflcards
+package io.github.ksmirenko.toeflcards
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.provider.BaseColumns
-import com.ksmirenko.toeflcards.data.Card
-import com.ksmirenko.toeflcards.data.CardPack
-import com.ksmirenko.toeflcards.data.Category
-import com.ksmirenko.toeflcards.data.Module
+
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper
-import java.util.ArrayList
+import io.github.ksmirenko.toeflcards.data.Card
+import io.github.ksmirenko.toeflcards.data.CardPack
+import io.github.ksmirenko.toeflcards.data.Category
+import io.github.ksmirenko.toeflcards.data.Module
+import java.util.*
 
 /**
  * The application's SQL database manager.
@@ -158,7 +159,7 @@ class FlexiDatabase(context : Context, dbname : String) :
         val db = readableDatabase
         // This SQL call should be conformed with CategoryQuery
         val sql = "SELECT * FROM ${CategoryEntry.TABLE_NAME} " +
-            "ORDER BY ${CategoryEntry.COLUMN_NAME_LANGUAGE}, ${CategoryEntry.COLUMN_NAME_NAME}$COLLATION"
+            "ORDER BY ${CategoryEntry.COLUMN_NAME_LANGUAGE}, ${CategoryEntry.COLUMN_NAME_NAME}${COLLATION}"
         return db.rawQuery(sql, null)
     }
 

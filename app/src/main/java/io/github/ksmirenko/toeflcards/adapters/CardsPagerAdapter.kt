@@ -1,14 +1,12 @@
-package com.ksmirenko.toeflcards.adapters
+package io.github.ksmirenko.toeflcards.adapters
 
 import android.app.Fragment
 import android.app.FragmentManager
 import android.database.Cursor
 import android.os.Bundle
-//import android.support.v4.app.Fragment
-//import android.support.v4.app.FragmentManager
 import android.support.v13.app.FragmentStatePagerAdapter
-import com.ksmirenko.toeflcards.layout.CardContainerFragment
-import com.ksmirenko.toeflcards.FlexiDatabase
+import io.github.ksmirenko.toeflcards.layout.CardContainerFragment
+import io.github.ksmirenko.toeflcards.FlexiDatabase
 
 /**
  * Adapter for card collection (used when viewing a module).

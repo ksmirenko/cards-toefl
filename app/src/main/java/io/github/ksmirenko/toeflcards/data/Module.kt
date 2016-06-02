@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards.data
+package io.github.ksmirenko.toeflcards.data
 
 /**
  * A Module is a holistic pack of cards of one category.

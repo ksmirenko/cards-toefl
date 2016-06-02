@@ -1,22 +1,19 @@
-package com.ksmirenko.toeflcards.layout
+package io.github.ksmirenko.toeflcards.layout
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CursorAdapter
 import android.widget.Toast
 
-import com.ksmirenko.toeflcards.FlexiDatabaseProvider
-import com.ksmirenko.toeflcards.R
-import com.ksmirenko.toeflcards.adapters.ModuleCursorAdapter
+import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
+import io.github.ksmirenko.toeflcards.R
+import io.github.ksmirenko.toeflcards.adapters.ModuleCursorAdapter
 import kotlinx.android.synthetic.main.fragment_modules_list.view.*
-import kotlinx.android.synthetic.main.fragment_module_settings.view.*
 
 /**
  * Fragment for category screen, contains a dictionary button and list of modules.

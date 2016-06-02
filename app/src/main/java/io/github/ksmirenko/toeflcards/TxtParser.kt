@@ -1,6 +1,6 @@
-package com.ksmirenko.toeflcards
+package io.github.ksmirenko.toeflcards
 
-import com.ksmirenko.toeflcards.data.CardPack
+import io.github.ksmirenko.toeflcards.data.CardPack
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader

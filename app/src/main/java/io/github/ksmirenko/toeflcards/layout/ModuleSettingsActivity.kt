@@ -1,9 +1,10 @@
-package com.ksmirenko.toeflcards.layout
+package io.github.ksmirenko.toeflcards.layout
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceFragment
-import com.ksmirenko.toeflcards.R
+
+import io.github.ksmirenko.toeflcards.R
 
 class ModuleSettingsActivity : AppCompatActivity() {
 

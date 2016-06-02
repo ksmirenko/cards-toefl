@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards.data
+package io.github.ksmirenko.toeflcards.data
 
 /**
  * A CategoryInfo describes a category and is shown on the category select screen.

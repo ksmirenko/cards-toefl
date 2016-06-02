@@ -1,4 +1,4 @@
-package com.ksmirenko.toeflcards.data
+package io.github.ksmirenko.toeflcards.data
 
 /**
  * A Card is a flash card with two sides.
