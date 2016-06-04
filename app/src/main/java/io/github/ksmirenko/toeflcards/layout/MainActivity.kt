@@ -19,18 +19,13 @@ import io.github.ksmirenko.toeflcards.R
  * @author Kirill Smirenko
  */
 class MainActivity : AppCompatActivity() {
-    private val dbFilename = "toeflcards.db"
-
     @SuppressWarnings("ConstantConditions")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appContext = this@MainActivity
         setContentView(R.layout.activity_main)
 
         // init database
-        if (!FlexiDatabaseProvider.hasDb()) {
-            FlexiDatabaseProvider.init(appContext!!, dbFilename)
-        }
+        FlexiDatabaseProvider.initIfNull(this@MainActivity)
 
         // add module list fragment
         if (savedInstanceState == null) {
@@ -51,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_module_settings -> {
-                val prefsIntent = Intent(appContext, ModuleSettingsActivity::class.java)
+                val prefsIntent = Intent(this, ModuleSettingsActivity::class.java)
                 startActivity(prefsIntent)
                 return true
             }
@@ -66,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAboutDialog() {
-        val d = AlertDialog.Builder(appContext)
+        val d = AlertDialog.Builder(this)
             .setPositiveButton(android.R.string.ok, null)
             .setMessage(R.string.text_about)
             .setTitle(R.string.app_name)
@@ -74,13 +69,5 @@ class MainActivity : AppCompatActivity() {
         d.show();
         (d.findViewById(android.R.id.message) as TextView).movementMethod =
             LinkMovementMethod.getInstance()
-    }
-
-    companion object {
-        /**
-         * Context for the fragments to work normally.
-         */
-        var appContext: Context? = null
-            private set
     }
 }

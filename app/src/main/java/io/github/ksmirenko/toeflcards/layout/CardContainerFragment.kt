@@ -128,7 +128,7 @@ class CardContainerFragment : Fragment() {
         override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
-            rootView.setBackgroundColor(ContextCompat.getColor(MainActivity.appContext, R.color.background))
+            rootView.setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, R.color.background))
             val textView = rootView.findViewById(R.id.textview_cardview_mainfield) as TextView
             textView.text = arguments.getString(ARG_FRONT_CONTENT)
             rootView.findViewById(R.id.button_cardview_know).setOnClickListener { callbacks.onCardButtonClicked(true) }
@@ -146,7 +146,7 @@ class CardContainerFragment : Fragment() {
         override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                                   savedInstanceState: Bundle?): View? {
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
-            rootView.setBackgroundColor(ContextCompat.getColor(MainActivity.appContext, R.color.backgroundDark))
+            rootView.setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, R.color.backgroundDark))
             val textView = rootView.findViewById(R.id.textview_cardview_mainfield) as TextView
             textView.text = arguments.getString(ARG_BACK_CONTENT)
             rootView.findViewById(R.id.button_cardview_know).setOnClickListener { callbacks.onCardButtonClicked(true) }

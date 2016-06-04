@@ -1,6 +1,7 @@
 package io.github.ksmirenko.toeflcards.layout
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
@@ -36,6 +37,9 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card)
 
+        // set up context
+        appContext = applicationContext
+
         // hide action bar
         supportActionBar?.hide()
 
@@ -49,6 +53,7 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         val isUnansweredOnly = prefs.getBoolean(getString(R.string.pref_unanswered), true)
 
         // obtaining cards
+        FlexiDatabaseProvider.initIfNull(applicationContext)
         val db = FlexiDatabaseProvider.db
         cardCursor = db.getModuleCards(moduleId, isRandom, isUnansweredOnly)
         if (isUnansweredOnly && cardCursor!!.count == 0) {
@@ -113,5 +118,11 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
     companion object {
         // intent arguments
         val ARG_MODULE_ID = "module_id"
+
+        /**
+         * Context for the fragments to work normally.
+         */
+        var appContext: Context? = null
+            private set
     }
 }

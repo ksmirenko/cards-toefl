@@ -8,10 +8,14 @@ import android.content.Context
  * @author Kirill Smirenko
  */
 object FlexiDatabaseProvider {
+    private val dbFilename = "toeflcards.db"
+
     private var database : FlexiDatabase? = null
 
-    fun init(context : Context, dbname : String) {
-        database = FlexiDatabase(context, dbname);
+    fun initIfNull(context : Context) {
+        if (database == null) {
+            database = FlexiDatabase(context, dbFilename)
+        }
     }
 
     fun hasDb() = database != null
