@@ -27,6 +27,7 @@ class ModuleListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        FlexiDatabaseProvider.initIfNull(context)
         val db = FlexiDatabaseProvider.db
         val cursor = db.getModules(categoryId)
         modulesAdapter = ModuleCursorAdapter(context, cursor)

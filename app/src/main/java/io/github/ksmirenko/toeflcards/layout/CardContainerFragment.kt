@@ -17,6 +17,7 @@
 
 package io.github.ksmirenko.toeflcards.layout
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.app.Fragment
 import android.content.Context
@@ -27,6 +28,8 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import io.github.ksmirenko.toeflcards.R
+import kotlinx.android.synthetic.main.fragment_card.*
+import kotlinx.android.synthetic.main.fragment_card.view.*
 import kotlinx.android.synthetic.main.fragment_tap_hint.view.*
 
 /**
@@ -47,17 +50,19 @@ class CardContainerFragment : Fragment() {
 
     private var callbacks: Callbacks = dummyCallbacks
     private var isShowingBack = false
+    private var isShowingHint = false
 
+    @TargetApi(23)
     override fun onAttach(context: Context) {
-        super.onAttach(context)
         callbacks = context as Callbacks
+        super.onAttach(context)
     }
 
     // this is needed to support lower APIs
     @Suppress("OverridingDeprecatedMember", "DEPRECATION")
     override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
         callbacks = activity as Callbacks
+        super.onAttach(activity)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -66,13 +71,40 @@ class CardContainerFragment : Fragment() {
         val args = arguments
         isShowingBack = args.getBoolean(ARG_IS_BACK_FIRST, false)
 
-        // adding card layout
-        val cardFragment = if (isShowingBack) CardBackFragment(callbacks) else CardFrontFragment(callbacks)
-        cardFragment.arguments = args // small workaround
-        childFragmentManager
-            .beginTransaction()
-            .add(R.id.layout_card_container, cardFragment)
-            .commit()
+        if (savedInstanceState == null) {
+            // if launched for the first time, show "tap to flip" hint fragment
+            val prefs = activity.getSharedPreferences(HINT_PREFS_NAME, 0)
+            if (prefs.getBoolean(HINT_PREFS_NAME, true)) {
+                val hintFragment = TapHintFragment {
+                    // show card fragment
+                    val cardFragment = if (isShowingBack) CardBackFragment(callbacks) else CardFrontFragment(callbacks)
+                    cardFragment.arguments = args // small workaround
+                    childFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.layout_card_container, cardFragment)
+                        .commit()
+                    isShowingHint = false
+                }
+                // show hint fragment
+                childFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.layout_card_container, hintFragment, HINT_FRAGMENT_TAG)
+                    .commit()
+                isShowingHint = true
+                val res = prefs.edit().putBoolean(HINT_PREFS_NAME, false).commit()
+                println(res)
+            }
+            else {
+                // show card fragment
+                val cardFragment = if (isShowingBack) CardBackFragment(callbacks) else CardFrontFragment(callbacks)
+                cardFragment.arguments = args // small workaround
+                childFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.layout_card_container, cardFragment)
+                    .commit()
+            }
+        }
+
         // adding event handler
         val gestureDetector = GestureDetector(activity, CardGestureDetector(flipCard))
         val layout = rootView.findViewById(R.id.layout_card_container)
@@ -83,23 +115,16 @@ class CardContainerFragment : Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // if launched for the first time, show "tap to flip" hint fragment
-        val prefs = activity.getSharedPreferences(HINT_PREFS_NAME, 0)
-        if (prefs.getBoolean(HINT_PREFS_NAME, true)) {
-            val hintFragment = TapHintFragment {
-                childFragmentManager
-                    .beginTransaction()
-                    .remove(childFragmentManager.findFragmentByTag(HINT_FRAGMENT_TAG))
-                    .commit()
-            }
-            childFragmentManager
-                .beginTransaction()
-                .add(R.id.layout_card_container, hintFragment, HINT_FRAGMENT_TAG)
-                .commit()
-            prefs.edit().putBoolean(HINT_PREFS_NAME, false).apply()
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            isShowingBack = savedInstanceState.getBoolean("isShowingBack")
         }
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putBoolean("isShowingBack", isShowingBack)
+        super.onSaveInstanceState(outState)
     }
 
     override fun onDetach() {
@@ -108,7 +133,14 @@ class CardContainerFragment : Fragment() {
     }
 
     private val flipCard = {
-        val newFragment = if (isShowingBack) CardFrontFragment(callbacks) else CardBackFragment(callbacks)
+        if (isShowingHint) {
+            // if flipping hint fragment, first show the side that would have been shown
+            // on "got it"
+            isShowingBack = !isShowingBack
+            isShowingHint = false
+        }
+        val newFragment =
+            if (isShowingBack) CardFrontFragment(callbacks) else CardBackFragment(callbacks)
         newFragment.arguments = arguments
         childFragmentManager
             .beginTransaction()
@@ -129,11 +161,11 @@ class CardContainerFragment : Fragment() {
                                   savedInstanceState: Bundle?): View? {
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
             rootView.setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, R.color.background))
-            val textView = rootView.findViewById(R.id.textview_cardview_mainfield) as TextView
+            val textView = rootView.textview_cardview_mainfield
             textView.text = arguments.getString(ARG_FRONT_CONTENT)
-            rootView.findViewById(R.id.button_cardview_know).setOnClickListener { callbacks.onCardButtonClicked(true) }
-            rootView.findViewById(R.id.button_cardview_notknow).setOnClickListener { callbacks.onCardButtonClicked(false) }
-            val iconQuit = rootView.findViewById(R.id.icon_cardview_quit) as ImageView
+            rootView.button_cardview_know.setOnClickListener { callbacks.onCardButtonClicked(true) }
+            rootView.button_cardview_notknow.setOnClickListener { callbacks.onCardButtonClicked(false) }
+            val iconQuit = rootView.icon_cardview_quit
             iconQuit.setOnClickListener { callbacks.onQuitButtonClicked() }
             return rootView
         }
@@ -147,11 +179,11 @@ class CardContainerFragment : Fragment() {
                                   savedInstanceState: Bundle?): View? {
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
             rootView.setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, R.color.backgroundDark))
-            val textView = rootView.findViewById(R.id.textview_cardview_mainfield) as TextView
+            val textView = rootView.textview_cardview_mainfield
             textView.text = arguments.getString(ARG_BACK_CONTENT)
-            rootView.findViewById(R.id.button_cardview_know).setOnClickListener { callbacks.onCardButtonClicked(true) }
-            rootView.findViewById(R.id.button_cardview_notknow).setOnClickListener { callbacks.onCardButtonClicked(false) }
-            val iconQuit = rootView.findViewById(R.id.icon_cardview_quit) as ImageView
+            rootView.button_cardview_know.setOnClickListener { callbacks.onCardButtonClicked(true) }
+            rootView.button_cardview_notknow.setOnClickListener { callbacks.onCardButtonClicked(false) }
+            val iconQuit = rootView.icon_cardview_quit
             iconQuit.setOnClickListener { callbacks.onQuitButtonClicked() }
             return rootView
         }
@@ -174,6 +206,7 @@ class CardContainerFragment : Fragment() {
 
     class DummyCallbacks() : Callbacks {
         override fun onCardButtonClicked(knowIt: Boolean) {
+            println("ftw")
         }
 
         override fun onQuitButtonClicked() {
