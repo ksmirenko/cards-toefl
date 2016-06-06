@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -72,6 +73,10 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
 
     override fun onBackPressed() {
         saveAndExit(true)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     // callback for cards' buttons
