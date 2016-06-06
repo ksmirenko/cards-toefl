@@ -1,7 +1,11 @@
 # Cards for the TOEFL® Test
-An Android app which helps you learn vocabulary for the TOEFL Test.
+An Android app which helps Russian speakers learn vocabulary for the TOEFL Test.
 
-Minimal supported Android version is 4.2 (API 17).
+## Download
+
+You can find the latest version [here](https://github.com/ksmirenko/cards-toefl/releases).
+
+Android 4.2 (API 17) or higher is required. The app is designed for phones, but runs on tablets as well.
 
 ## Features:
 
