@@ -5,62 +5,65 @@
                 android:layout_height="match_parent">
 
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/icon_cardview_quit"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/ic_clear_black_24dp"
-            android:contentDescription="@string/quit"
-            tools:ignore="RtlHardcoded"/>
+        android:id="@+id/icon_cardview_quit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/quit"
+        android:padding="20dp"
+        android:src="@drawable/ic_clear_black_24dp"
+        tools:ignore="RtlHardcoded"/>
+
     <TextView
-            android:id="@+id/textview_cardview_mainfield"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/margin_card_topbottom"
-            android:layout_marginBottom="@dimen/margin_card_topbottom"
-            android:layout_marginLeft="@dimen/margin_card_sides"
-            android:layout_marginStart="@dimen/margin_card_sides"
-            android:layout_marginRight="@dimen/margin_card_sides"
-            android:layout_marginEnd="@dimen/margin_card_sides"
-            android:textSize="@dimen/text_size_card"
-            android:textColor="@color/textPrimary"
-            android:singleLine="false"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:maxLines="10"
-            android:scrollbars="vertical"
-            tools:ignore="RelativeOverlap"/>
+        android:id="@+id/textview_cardview_mainfield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/margin_card_topbottom"
+        android:layout_marginEnd="@dimen/margin_card_sides"
+        android:layout_marginLeft="@dimen/margin_card_sides"
+        android:layout_marginRight="@dimen/margin_card_sides"
+        android:layout_marginStart="@dimen/margin_card_sides"
+        android:layout_marginTop="@dimen/margin_card_topbottom"
+        android:gravity="center"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_size_card"
+        tools:ignore="RelativeOverlap"/>
 
     <!-- Intercard navigation panel -->
     <LinearLayout
-            style="?attr/buttonBarStyle"
+        style="?attr/buttonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_cardview_know"
+            style="?attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:orientation="horizontal">
+            android:padding="16dp"
+            android:text="@string/button_knew"
+            android:textColor="@color/primaryDark"
+            android:textSize="@dimen/text_size_dialog"/>
+
         <Button
-                android:id="@+id/button_cardview_know"
-                style="?attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_knew"
-                android:textSize="@dimen/text_size_dialog"/>
-        <Button
-                android:id="@+id/button_cardview_notknow"
-                style="?attr/buttonBarButtonStyle"
-                android:layout_marginLeft="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button_notknew"
-                android:textSize="@dimen/text_size_dialog"
-                tools:ignore="RtlHardcoded"/>
+            android:id="@+id/button_cardview_notknow"
+            style="?attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/button_notknew"
+            android:textColor="@color/primaryDark"
+            android:textSize="@dimen/text_size_dialog"/>
     </LinearLayout>
 </RelativeLayout>

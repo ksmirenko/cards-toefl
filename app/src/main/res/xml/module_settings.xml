@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:key="@string/pref_back_first"
+        android:title="@string/back_side_first"
+        android:defaultValue="false"/>
+    <SwitchPreference
+        android:key="@string/pref_shuffle"
+        android:title="@string/random_order"
+        android:defaultValue="true"/>
+    <SwitchPreference
+        android:key="@string/pref_unanswered"
+        android:title="@string/only_unanswered"
+        android:defaultValue="true"/>
+</PreferenceScreen>

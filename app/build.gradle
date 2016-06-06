@@ -4,12 +4,14 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 repositories {
     jcenter()
@@ -20,11 +22,11 @@ android {
     buildToolsVersion '23.0.3'
 
     defaultConfig {
-        applicationId "com.ksmirenko.toeflcards"
+        applicationId "io.github.ksmirenko.toeflcards"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
-        versionName "0.1"
+        versionName "0.1.0"
     }
     buildTypes {
         release {
@@ -43,5 +45,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:$android_support_version"
     compile "com.android.support:support-v13:$android_support_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+    compile "com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1"
+    compile "com.melnykov:floatingactionbutton:1.3.0"
 }
