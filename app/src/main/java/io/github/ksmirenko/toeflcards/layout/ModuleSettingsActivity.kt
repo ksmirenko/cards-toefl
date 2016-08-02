@@ -14,7 +14,7 @@ class ModuleSettingsActivity : AppCompatActivity() {
 
         fragmentManager.beginTransaction()
             .replace(android.R.id.content, ModuleSettingsFragment())
-            .commit();
+            .commit()
     }
 
     class ModuleSettingsFragment : PreferenceFragment() {

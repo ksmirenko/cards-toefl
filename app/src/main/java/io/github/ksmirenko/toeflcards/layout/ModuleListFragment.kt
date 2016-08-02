@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.CursorAdapter
 import android.widget.Toast
 
-import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
 import io.github.ksmirenko.toeflcards.adapters.ModuleCursorAdapter
 import kotlinx.android.synthetic.main.fragment_modules_list.view.*
@@ -27,8 +27,8 @@ class ModuleListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        FlexiDatabaseProvider.initIfNull(context)
-        val db = FlexiDatabaseProvider.db
+        ToeflCardsDatabaseProvider.initIfNull(context)
+        val db = ToeflCardsDatabaseProvider.db
         val cursor = db.getModules(categoryId)
         modulesAdapter = ModuleCursorAdapter(context, cursor)
     }
@@ -69,7 +69,7 @@ class ModuleListFragment : Fragment() {
             val totalCount = data.getIntExtra(RES_ARG_CARDS_TOTAL_CNT, -1)
             val unanswered = data.getStringExtra(RES_ARG_CARDS_UNANSWERED)
             val moduleId = data.getLongExtra(RES_ARG_MODULE_ID, -1)
-            val db = FlexiDatabaseProvider.db
+            val db = ToeflCardsDatabaseProvider.db
             db.updateModuleProgress(moduleId, unanswered)
             Toast.makeText(
                 context,

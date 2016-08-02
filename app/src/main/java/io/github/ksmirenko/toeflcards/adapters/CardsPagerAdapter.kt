@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.os.Bundle
 import android.support.v13.app.FragmentStatePagerAdapter
 import io.github.ksmirenko.toeflcards.layout.CardContainerFragment
-import io.github.ksmirenko.toeflcards.FlexiDatabase
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabase
 
 /**
  * Adapter for card collection (used when viewing a module).
@@ -24,9 +24,9 @@ class CardsPagerAdapter(
         val args = Bundle()
         cardsCursor.moveToPosition(i) // may be inefficient
         args.putString(CardContainerFragment.ARG_FRONT_CONTENT,
-                cardsCursor.getString(FlexiDatabase.CardQuery.COLUMN_INDEX_FRONT))
+                cardsCursor.getString(ToeflCardsDatabase.CardQuery.COLUMN_INDEX_FRONT))
         args.putString(CardContainerFragment.ARG_BACK_CONTENT,
-                cardsCursor.getString(FlexiDatabase.CardQuery.COLUMN_INDEX_BACK))
+                cardsCursor.getString(ToeflCardsDatabase.CardQuery.COLUMN_INDEX_BACK))
         args.putBoolean(CardContainerFragment.ARG_IS_BACK_FIRST, isBackFirst)
         fragment.arguments = args
 

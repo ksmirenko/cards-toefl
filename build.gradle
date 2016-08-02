@@ -14,7 +14,7 @@ allprojects {
     ext {
         gradle_version = '2.14.0'
         kotlin_version = '1.0.3'
-        android_build_tools_version = '24.0.0'
+        android_build_tools_version = '24.0.1'
         android_support_version = '24.1.1'
     }
 

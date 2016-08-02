@@ -10,8 +10,8 @@ import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 
-import io.github.ksmirenko.toeflcards.FlexiDatabase
-import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabase
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
 import io.github.ksmirenko.toeflcards.StringUtils
 import io.github.ksmirenko.toeflcards.adapters.CardsPagerAdapter
@@ -25,7 +25,7 @@ import java.util.*
  */
 class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
     // for extracting data from cursor
-    private val COLUMN_INDEX = FlexiDatabase.CardQuery.COLUMN_INDEX_ID
+    private val COLUMN_INDEX = ToeflCardsDatabase.CardQuery.COLUMN_INDEX_ID
 
     private var cardCursor: Cursor? = null // FIXME: make it non-nullable
 
@@ -54,8 +54,8 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         val isUnansweredOnly = prefs.getBoolean(getString(R.string.pref_unanswered), true)
 
         // obtaining cards
-        FlexiDatabaseProvider.initIfNull(applicationContext)
-        val db = FlexiDatabaseProvider.db
+        ToeflCardsDatabaseProvider.initIfNull(applicationContext)
+        val db = ToeflCardsDatabaseProvider.db
         cardCursor = db.getModuleCards(moduleId, isRandom, isUnansweredOnly)
         if (isUnansweredOnly && cardCursor!!.count == 0) {
             cardCursor = db.getModuleCards(moduleId, isRandom, false)

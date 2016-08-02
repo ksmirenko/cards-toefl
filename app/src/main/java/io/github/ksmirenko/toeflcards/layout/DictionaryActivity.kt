@@ -13,8 +13,8 @@ import android.widget.SearchView
 import android.widget.SimpleCursorAdapter
 
 import io.github.ksmirenko.toeflcards.DictionaryFilterQueryProvider
-import io.github.ksmirenko.toeflcards.FlexiDatabase
-import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabase
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
 
 /**
@@ -35,13 +35,13 @@ class DictionaryActivity : AppCompatActivity() {
 
         // filling the main list view
         val categoryId = intent.getLongExtra(ARG_CATEGORY_ID, 0)
-        val db = FlexiDatabaseProvider.db
+        val db = ToeflCardsDatabaseProvider.db
         val cursor = db.getDictionary(categoryId)
         adapter = SimpleCursorAdapter(
             this,
             R.layout.listview_item_dictionary,
             cursor,
-            FlexiDatabase.CardQuery.getCursorAdapterArg(),
+            ToeflCardsDatabase.CardQuery.getCursorAdapterArg(),
             intArrayOf(R.id.textview_listitem_dict_front, R.id.textview_listitem_dict_back),
             CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
         )
@@ -49,7 +49,6 @@ class DictionaryActivity : AppCompatActivity() {
         val listView = findViewById(R.id.listview_dictionary) as ListView?
         listView!!.adapter = adapter
         listView.isTextFilterEnabled = true
-
         handleIntent(intent)
     }
 

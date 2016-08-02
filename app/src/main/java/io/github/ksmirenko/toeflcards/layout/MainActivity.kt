@@ -1,6 +1,5 @@
 package io.github.ksmirenko.toeflcards.layout
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -10,8 +9,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 
-import io.github.ksmirenko.toeflcards.FlexiDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 
 /**
  * Activity for category screen.
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // init database
-        FlexiDatabaseProvider.initIfNull(this@MainActivity)
+        ToeflCardsDatabaseProvider.initIfNull(this@MainActivity)
 
         // add module list fragment
         if (savedInstanceState == null) {
@@ -64,8 +63,8 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(android.R.string.ok, null)
             .setMessage(R.string.text_about)
             .setTitle(R.string.app_name)
-            .create();
-        d.show();
+            .create()
+        d.show()
         (d.findViewById(android.R.id.message) as TextView).movementMethod =
             LinkMovementMethod.getInstance()
     }
