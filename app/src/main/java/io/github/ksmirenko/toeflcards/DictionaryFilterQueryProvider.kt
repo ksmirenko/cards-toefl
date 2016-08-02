@@ -5,8 +5,11 @@ import android.widget.FilterQueryProvider
 /**
  * Filter query provider for Dictionary.
  */
-class DictionaryFilterQueryProvider(val categoryId: Long, val db: ToeflCardsDatabase)
-: FilterQueryProvider {
+class DictionaryFilterQueryProvider(
+    private val categoryId: Long,
+    private val db: ToeflCardsDatabase
+) : FilterQueryProvider {
+    // according to documentation, this is performed asynchronously
     override fun runQuery(constraint: CharSequence?) =
-            db.getDictionaryFiltered(categoryId, constraint)
+        db.getDictionaryFiltered(categoryId, constraint)
 }

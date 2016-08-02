@@ -51,7 +51,7 @@
             android:paddingLeft="8dp"
             android:paddingStart="8dp"
             android:checked="true"
-            android:text="@string/only_unanswered"
+            android:text="@string/only_unanswered_short"
             android:textSize="@dimen/text_size_list_item_primary"
             tools:ignore="RtlHardcoded,RtlSymmetry"/>
 </LinearLayout>

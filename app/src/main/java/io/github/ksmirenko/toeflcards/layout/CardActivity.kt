@@ -16,6 +16,9 @@ import io.github.ksmirenko.toeflcards.R
 import io.github.ksmirenko.toeflcards.StringUtils
 import io.github.ksmirenko.toeflcards.adapters.CardsPagerAdapter
 import kotlinx.android.synthetic.main.activity_card.*
+import nl.komponents.kovenant.task
+import nl.komponents.kovenant.then
+import nl.komponents.kovenant.ui.successUi
 import java.util.*
 
 /**
@@ -56,19 +59,21 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         // obtaining cards
         ToeflCardsDatabaseProvider.initIfNull(applicationContext)
         val db = ToeflCardsDatabaseProvider.db
-        cardCursor = db.getModuleCards(moduleId, isRandom, isUnansweredOnly)
-        if (isUnansweredOnly && cardCursor!!.count == 0) {
-            cardCursor = db.getModuleCards(moduleId, isRandom, false)
-            Toast.makeText(this, R.string.no_unanswered_cards, Toast.LENGTH_SHORT).show()
+        task {
+            cardCursor = db.getModuleCards(moduleId, isRandom, isUnansweredOnly)
+        } then {
+            if (isUnansweredOnly && cardCursor!!.count == 0) {
+                cardCursor = db.getModuleCards(moduleId, isRandom, false)
+                Toast.makeText(this, R.string.no_unanswered_cards, Toast.LENGTH_SHORT).show()
+            }
+        } successUi {
+            // setting up adapter
+            val pagerAdapter = CardsPagerAdapter(fragmentManager, cardCursor!!, isBackFirst)
+            viewpager_card_container.adapter = pagerAdapter
+            // initializing counters
+            cardsTotalCount = cardCursor!!.count
+            cardsUnansweredIds = ArrayList<Long>()
         }
-
-        // setting up adapter
-        val pagerAdapter = CardsPagerAdapter(fragmentManager, cardCursor!!, isBackFirst)
-        viewpager_card_container.adapter = pagerAdapter
-
-        // initializing counters
-        cardsTotalCount = cardCursor!!.count
-        cardsUnansweredIds = ArrayList<Long>()
     }
 
     override fun onBackPressed() {

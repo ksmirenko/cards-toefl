@@ -16,6 +16,9 @@ import io.github.ksmirenko.toeflcards.DictionaryFilterQueryProvider
 import io.github.ksmirenko.toeflcards.ToeflCardsDatabase
 import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
+import nl.komponents.kovenant.task
+import nl.komponents.kovenant.then
+import nl.komponents.kovenant.ui.successUi
 
 /**
  * Dictionary activity - category selection screen.
@@ -23,7 +26,7 @@ import io.github.ksmirenko.toeflcards.R
  * @author Kirill Smirenko
  */
 class DictionaryActivity : AppCompatActivity() {
-    private var adapter: CursorAdapter? = null // FIXME: make it non-nullable
+    private lateinit var adapter: CursorAdapter // FIXME: make it non-nullable
 
     @SuppressWarnings("ConstantConditions")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,20 +39,24 @@ class DictionaryActivity : AppCompatActivity() {
         // filling the main list view
         val categoryId = intent.getLongExtra(ARG_CATEGORY_ID, 0)
         val db = ToeflCardsDatabaseProvider.db
-        val cursor = db.getDictionary(categoryId)
-        adapter = SimpleCursorAdapter(
-            this,
-            R.layout.listview_item_dictionary,
-            cursor,
-            ToeflCardsDatabase.CardQuery.getCursorAdapterArg(),
-            intArrayOf(R.id.textview_listitem_dict_front, R.id.textview_listitem_dict_back),
-            CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
-        )
-        adapter!!.filterQueryProvider = DictionaryFilterQueryProvider(categoryId, db)
-        val listView = findViewById(R.id.listview_dictionary) as ListView?
-        listView!!.adapter = adapter
-        listView.isTextFilterEnabled = true
-        handleIntent(intent)
+        task {
+            db.getDictionary(categoryId)
+        } successUi {
+            cursor ->
+            adapter = SimpleCursorAdapter(
+                this,
+                R.layout.listview_item_dictionary,
+                cursor,
+                ToeflCardsDatabase.CardQuery.getCursorAdapterArg(),
+                intArrayOf(R.id.textview_listitem_dict_front, R.id.textview_listitem_dict_back),
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
+            )
+            adapter.filterQueryProvider = DictionaryFilterQueryProvider(categoryId, db)
+            val listView = findViewById(R.id.listview_dictionary) as ListView
+            listView.adapter = adapter
+            listView.isTextFilterEnabled = true
+            handleIntent(intent)
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -69,14 +76,14 @@ class DictionaryActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                adapter!!.filter.filter(newText)
-                adapter!!.notifyDataSetChanged()
+                adapter.filter.filter(newText)
+                adapter.notifyDataSetChanged()
                 return true
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                adapter!!.filter.filter(query)
-                adapter!!.notifyDataSetChanged()
+                adapter.filter.filter(query)
+                adapter.notifyDataSetChanged()
                 return true
             }
         })
@@ -96,8 +103,8 @@ class DictionaryActivity : AppCompatActivity() {
     private fun handleIntent(intent: Intent) {
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
-            adapter!!.filter.filter(query)
-            adapter!!.notifyDataSetChanged()
+            adapter.filter.filter(query)
+            adapter.notifyDataSetChanged()
         }
     }
 

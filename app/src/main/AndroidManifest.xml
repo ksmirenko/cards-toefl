@@ -4,12 +4,13 @@
           package="io.github.ksmirenko.toeflcards">
 
     <application
+        android:name="ToeflCardsApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backupscheme"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
         android:supportsRtl="false"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".layout.MainActivity"

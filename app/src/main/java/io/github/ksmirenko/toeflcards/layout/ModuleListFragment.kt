@@ -8,12 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CursorAdapter
+import android.widget.ListView
 import android.widget.Toast
 
 import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
 import io.github.ksmirenko.toeflcards.adapters.ModuleCursorAdapter
 import kotlinx.android.synthetic.main.fragment_modules_list.view.*
+import nl.komponents.kovenant.task
+import nl.komponents.kovenant.then
+import nl.komponents.kovenant.ui.successUi
 
 /**
  * Fragment for category screen, contains a dictionary button and list of modules.
@@ -22,36 +26,38 @@ import kotlinx.android.synthetic.main.fragment_modules_list.view.*
  */
 class ModuleListFragment : Fragment() {
     private val categoryId = 1L
+
+    private lateinit var moduleListView: ListView
     private var modulesAdapter: CursorAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         ToeflCardsDatabaseProvider.initIfNull(context)
+        // load the list of modules in background thread
         val db = ToeflCardsDatabaseProvider.db
-        val cursor = db.getModules(categoryId)
-        modulesAdapter = ModuleCursorAdapter(context, cursor)
+        task {
+            db.getModules(categoryId)
+        } successUi {
+            cursor ->
+            modulesAdapter = ModuleCursorAdapter(context, cursor)
+            setupListAdapter()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater!!.inflate(R.layout.fragment_modules_list, container, false)
-        val listView = rootView.listview_modules
+        moduleListView = rootView.listview_modules
 
         // filling the list with modules and setting up onClick
         if (modulesAdapter != null) {
-            listView.adapter = modulesAdapter
-            listView.setOnItemClickListener { parent, view, position, id ->
-                // launch card view activity
-                val detailIntent = Intent(context, CardActivity::class.java)
-                detailIntent.putExtra(CardActivity.ARG_MODULE_ID, id)
-                startActivityForResult(detailIntent, RES_REQUEST_CODE)
-            }
+            setupListAdapter()
         }
 
         // attach the floating action button
         val fab = rootView.fab_dictionary
-        fab.attachToListView(listView)
+        fab.attachToListView(moduleListView)
         fab.setOnClickListener {
             // launch dictionary activity
             val dictIntent = Intent(context, DictionaryActivity::class.java)
@@ -70,12 +76,27 @@ class ModuleListFragment : Fragment() {
             val unanswered = data.getStringExtra(RES_ARG_CARDS_UNANSWERED)
             val moduleId = data.getLongExtra(RES_ARG_MODULE_ID, -1)
             val db = ToeflCardsDatabaseProvider.db
-            db.updateModuleProgress(moduleId, unanswered)
-            Toast.makeText(
-                context,
-                getString(R.string.cards_answered) + " "
-                    + (totalCount - unansweredCount) + "/" + totalCount,
-                Toast.LENGTH_SHORT).show()
+            task {
+                db.updateModuleProgress(moduleId, unanswered)
+            } successUi {
+                Toast.makeText(
+                    context,
+                    getString(R.string.cards_answered) + " "
+                        + (totalCount - unansweredCount) + "/" + totalCount,
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupListAdapter() {
+        with(moduleListView) {
+            adapter = modulesAdapter
+            setOnItemClickListener { parent, view, position, id ->
+                // launch card view activity
+                val detailIntent = Intent(context, CardActivity::class.java)
+                detailIntent.putExtra(CardActivity.ARG_MODULE_ID, id)
+                startActivityForResult(detailIntent, RES_REQUEST_CODE)
+            }
         }
     }
 

@@ -62,6 +62,7 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
         val moduleCardsRaw: String? = moduleCursor.getString(0)
         // if there is no data about unanswered, return all
         val moduleCards = if (isUnansweredOnly && moduleCardsRaw == null) {
+            // the next line throws a warning, although the cursor is recycled
             val anotherModuleCursor = readableDatabase.query(
                 ModuleEntry.TABLE_NAME,
                 arrayOf(ModuleEntry.COLUMN_NAME_CARDS),
