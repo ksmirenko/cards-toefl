@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchview_dictionary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:iconifiedByDefault="false"
+        android:maxWidth="10000dp"/>
+
+    <ListView
+        android:id="@+id/listview_dictionary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/searchview_dictionary"
+        android:cacheColorHint="@android:color/transparent"
+        android:clickable="false"
+        android:listSelector="@android:color/transparent"/>
+</RelativeLayout>

@@ -25,8 +25,6 @@ import nl.komponents.kovenant.ui.successUi
  * @author Kirill Smirenko
  */
 class ModuleListFragment : Fragment() {
-    private val categoryId = 1L
-
     private lateinit var moduleListView: ListView
     private var modulesAdapter: CursorAdapter? = null
 
@@ -37,7 +35,7 @@ class ModuleListFragment : Fragment() {
         // load the list of modules in background thread
         val db = ToeflCardsDatabaseProvider.db
         task {
-            db.getModules(categoryId)
+            db.getModules()
         } successUi {
             cursor ->
             modulesAdapter = ModuleCursorAdapter(context, cursor)
@@ -53,16 +51,6 @@ class ModuleListFragment : Fragment() {
         // filling the list with modules and setting up onClick
         if (modulesAdapter != null) {
             setupListAdapter()
-        }
-
-        // attach the floating action button
-        val fab = rootView.fab_dictionary
-        fab.attachToListView(moduleListView)
-        fab.setOnClickListener {
-            // launch dictionary activity
-            val dictIntent = Intent(context, DictionaryActivity::class.java)
-            dictIntent.putExtra(DictionaryActivity.ARG_CATEGORY_ID, categoryId)
-            startActivity(dictIntent)
         }
 
         return rootView

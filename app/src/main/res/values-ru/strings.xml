@@ -19,4 +19,5 @@
     <string name="back_side_first_long">Показывать сначала оборотную сторону</string>
     <string name="back_side_first_short">С оборотной стороны</string>
     <string name="only_unanswered_long">Показывать только неотвеченные карточки</string>
+    <string name="practice">Практика</string>
 </resources>

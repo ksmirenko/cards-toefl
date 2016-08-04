@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent" android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 tools:context=".layout.MainActivity">
 
-    <FrameLayout android:id="@+id/category_detail_container"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 tools:context="com.ksmirenko.androidsandbox.ItemDetailActivity"
-                 tools:ignore="MergeRootFrame"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout_main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/primary"/>
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tablayout_main_screen"/>
 </RelativeLayout>

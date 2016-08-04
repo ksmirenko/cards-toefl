@@ -11,10 +11,11 @@ import android.widget.TextView
 
 import io.github.ksmirenko.toeflcards.R
 import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
+import io.github.ksmirenko.toeflcards.adapters.MainScreenPagerAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
- * Activity for category screen.
-
+ * Activity for screen with the list of modules and dictionary.
  * @author Kirill Smirenko
  */
 class MainActivity : AppCompatActivity() {
@@ -26,12 +27,16 @@ class MainActivity : AppCompatActivity() {
         // init database
         ToeflCardsDatabaseProvider.initIfNull(this@MainActivity)
 
+        // remove action bar's evevation
+        supportActionBar?.elevation = 0F
+
         // add module list fragment
         if (savedInstanceState == null) {
-            val fragment = ModuleListFragment()
-            supportFragmentManager.beginTransaction().add(R.id.category_detail_container, fragment).commit()
+            val viewPager = viewpager_main_screen
+            viewPager.adapter = MainScreenPagerAdapter(supportFragmentManager, this)
+            tablayout_main_screen.setupWithViewPager(viewPager)
 
-            // clear prefs to show hint dialog on every launch
+            // debug code: clear prefs to show hint dialog on every launch
             //getSharedPreferences("ShouldShowHint", 0).edit().clear().apply()
         }
     }
@@ -67,5 +72,9 @@ class MainActivity : AppCompatActivity() {
         d.show()
         (d.findViewById(android.R.id.message) as TextView).movementMethod =
             LinkMovementMethod.getInstance()
+    }
+
+    companion object {
+        val toeflCategoryId = 1L
     }
 }

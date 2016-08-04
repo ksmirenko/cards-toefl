@@ -15,28 +15,29 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper
  * @author Kirill Smirenko
  */
 class ToeflCardsDatabase(context: Context, dbname: String) :
-    SQLiteAssetHelper(context, dbname, null, DATABASE_VERSION) {
+    SQLiteAssetHelper(context, dbname, null, databaseVersionNumber) {
     companion object {
-        private val DATABASE_VERSION = 1
+        private val databaseVersionNumber = 1
+        private val toeflCategoryId = 1L.toString()
 
-        private val COLLATION = " COLLATE UNICODE"
+        private val collationString = " COLLATE UNICODE"
     }
 
     /**
      * Returns a Cursor to cards of the specified module.
      */
-    fun getDictionary(categoryId: Long): Cursor? = readableDatabase.query(
+    fun getDictionary(): Cursor? = readableDatabase.query(
         CardEntry.TABLE_NAME,
         CardQuery.getQueryArg(),
         CardEntry.COLUMN_NAME_CATEGORY_ID + "=?",
-        arrayOf(categoryId.toString()),
-        null, null, CardEntry.COLUMN_NAME_FRONT_CONTENT + COLLATION)
+        arrayOf(toeflCategoryId),
+        null, null, CardEntry.COLUMN_NAME_FRONT_CONTENT + collationString)
 
     /**
      * Returns a Cursor to cards of the specified module
      * whose front or back content begins with [constraint].
      */
-    fun getDictionaryFiltered(categoryId: Long, constraint: CharSequence?): Cursor? {
+    fun getDictionaryFiltered(constraint: CharSequence?): Cursor? {
         val constr = "${constraint.toString()}%"
         return readableDatabase.query(
             CardEntry.TABLE_NAME,
@@ -44,8 +45,8 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
             "${CardEntry.COLUMN_NAME_CATEGORY_ID}=? AND " +
                 "(${CardEntry.COLUMN_NAME_FRONT_CONTENT} like ? " +
                 "OR ${CardEntry.COLUMN_NAME_BACK_CONTENT} like ?)",
-            arrayOf(categoryId.toString(), constr, constr),
-            null, null, CardEntry.COLUMN_NAME_FRONT_CONTENT + COLLATION)
+            arrayOf(toeflCategoryId, constr, constr),
+            null, null, CardEntry.COLUMN_NAME_FRONT_CONTENT + collationString)
     }
 
     /**
@@ -87,14 +88,14 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
     }
 
     /**
-     * Returns a Cursor to modules for the specified category.
+     * Returns a Cursor to modules of this app's database.
      */
-    fun getModules(categoryId: Long): Cursor? = readableDatabase.query(
+    fun getModules(): Cursor? = readableDatabase.query(
         ModuleEntry.TABLE_NAME,
         ModuleQuery.getNamesQueryArg(),
         ModuleEntry.COLUMN_NAME_CATEGORY_ID + "=?",
-        arrayOf(categoryId.toString()),
-        null, null, ModuleEntry.COLUMN_NAME_NAME + COLLATION)
+        arrayOf(toeflCategoryId),
+        null, null, ModuleEntry.COLUMN_NAME_NAME + collationString)
 
     /**
      * Saves user progress on a module.
