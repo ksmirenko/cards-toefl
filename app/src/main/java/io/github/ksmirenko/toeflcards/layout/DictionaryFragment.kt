@@ -2,6 +2,7 @@ package io.github.ksmirenko.toeflcards.layout
 
 import android.app.SearchManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
@@ -58,11 +59,7 @@ class DictionaryFragment : Fragment() {
         val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = rootView.searchview_dictionary
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
-        searchView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {
-                searchView.isIconified = false
-            }
-        })
+        searchView.setOnClickListener { searchView.isIconified = false }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
                 adapter?.filter?.filter(newText)
@@ -71,9 +68,6 @@ class DictionaryFragment : Fragment() {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (adapter == null) {
-                    Toast.makeText(context, "CursoraAdapter is null!", Toast.LENGTH_SHORT).show()
-                }
                 adapter?.filter?.filter(query)
                 adapter?.notifyDataSetChanged()
                 return true

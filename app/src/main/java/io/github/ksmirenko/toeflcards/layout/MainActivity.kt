@@ -31,14 +31,12 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0F
 
         // add module list fragment
-        if (savedInstanceState == null) {
-            val viewPager = viewpager_main_screen
-            viewPager.adapter = MainScreenPagerAdapter(supportFragmentManager, this)
-            tablayout_main_screen.setupWithViewPager(viewPager)
+        val viewPager = viewpager_main_screen
+        viewPager.adapter = MainScreenPagerAdapter(supportFragmentManager, this)
+        tablayout_main_screen.setupWithViewPager(viewPager)
 
-            // debug code: clear prefs to show hint dialog on every launch
-            //getSharedPreferences("ShouldShowHint", 0).edit().clear().apply()
-        }
+        // debug code: clear prefs to show hint dialog on every launch
+        //getSharedPreferences("ShouldShowHint", 0).edit().clear().apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

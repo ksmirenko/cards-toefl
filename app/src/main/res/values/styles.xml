@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
+        <item name="searchViewStyle">@style/SearchViewNoUnderline</item>
+        <!--<item name="android:textColorPrimary">@color/textPrimary</item>-->
     </style>
 
     <style name="ListItemTextView">
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColor">@color/textContentPrimary</item>
         <item name="android:textSize">@dimen/text_size_list_item_primary</item>
     </style>
 
@@ -20,5 +22,10 @@
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
     </style>
-    
+
+    <style name="SearchViewNoUnderline" parent="Widget.AppCompat.Light.SearchView">
+        <item name="submitBackground">@color/background</item>
+        <item name="queryBackground">@color/background</item>
+    </style>
+
 </resources>

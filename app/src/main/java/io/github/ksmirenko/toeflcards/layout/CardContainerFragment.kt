@@ -160,7 +160,7 @@ class CardContainerFragment : Fragment() {
             }
 
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
-            val bgColorId = if (isFrontFragment) R.color.background else R.color.backgroundDark
+            val bgColorId = if (isFrontFragment) R.color.backgroundColoredLight else R.color.backgroundColoredDark
             rootView.setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, bgColorId))
             val textView = rootView.textview_cardview_mainfield
             textView.text = arguments.getString(
