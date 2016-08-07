@@ -14,26 +14,30 @@ import io.github.ksmirenko.toeflcards.ToeflCardsDatabase
  * @author Kirill Smirenko
  */
 class CardsPagerAdapter(
-    fm : FragmentManager,
-    private val cardsCursor : Cursor,
-    private val isBackFirst : Boolean = false
+    fm: FragmentManager,
+    private val cardsCursor: Cursor,
+    private val isBackFirst: Boolean = false
 ) : FragmentStatePagerAdapter(fm) {
 
-    override fun getItem(i : Int) : Fragment {
+    override fun getItem(i: Int): Fragment {
         val fragment = CardContainerFragment()
         val args = Bundle()
         cardsCursor.moveToPosition(i) // may be inefficient
-        args.putString(CardContainerFragment.ARG_FRONT_CONTENT,
+        with(args) {
+            putString(CardContainerFragment.ARG_FRONT_CONTENT,
                 cardsCursor.getString(ToeflCardsDatabase.CardQuery.COLUMN_INDEX_FRONT))
-        args.putString(CardContainerFragment.ARG_BACK_CONTENT,
+            putString(CardContainerFragment.ARG_BACK_CONTENT,
                 cardsCursor.getString(ToeflCardsDatabase.CardQuery.COLUMN_INDEX_BACK))
-        args.putBoolean(CardContainerFragment.ARG_IS_BACK_FIRST, isBackFirst)
+            putInt(CardContainerFragment.ARG_NUMBER_CURRENT, i + 1)
+            putInt(CardContainerFragment.ARG_NUMBER_TOTAL, cardsCursor.count)
+            putBoolean(CardContainerFragment.ARG_IS_BACK_FIRST, isBackFirst)
+        }
         fragment.arguments = args
 
         return fragment
     }
 
-    override fun getCount() : Int {
+    override fun getCount(): Int {
         return cardsCursor.count
     }
 }

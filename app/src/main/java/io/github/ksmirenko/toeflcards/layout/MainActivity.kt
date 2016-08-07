@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         tablayout_main_screen.setupWithViewPager(viewPager)
 
         // debug code: clear prefs to show hint dialog on every launch
-        //getSharedPreferences("ShouldShowHint", 0).edit().clear().apply()
+        getSharedPreferences("ShouldShowHint", 0).edit().clear().apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
