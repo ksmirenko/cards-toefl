@@ -18,8 +18,6 @@ object ToeflCardsDatabaseProvider {
         }
     }
 
-    fun hasDb() = database != null
-
     val db : ToeflCardsDatabase
         get() {
             if (database == null) {

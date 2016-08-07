@@ -10,13 +10,11 @@ import android.view.ViewGroup
 import android.widget.CursorAdapter
 import android.widget.ListView
 import android.widget.Toast
-
-import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.R
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabaseProvider
 import io.github.ksmirenko.toeflcards.adapters.ModuleCursorAdapter
 import kotlinx.android.synthetic.main.fragment_modules_list.view.*
 import nl.komponents.kovenant.task
-import nl.komponents.kovenant.then
 import nl.komponents.kovenant.ui.successUi
 
 /**

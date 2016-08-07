@@ -2,7 +2,6 @@ package io.github.ksmirenko.toeflcards.layout
 
 import android.app.SearchManager
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
@@ -11,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CursorAdapter
 import android.widget.SimpleCursorAdapter
-import android.widget.Toast
 import io.github.ksmirenko.toeflcards.DictionaryFilterQueryProvider
 import io.github.ksmirenko.toeflcards.R
 import io.github.ksmirenko.toeflcards.ToeflCardsDatabase

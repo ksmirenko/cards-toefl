@@ -71,8 +71,4 @@ class MainActivity : AppCompatActivity() {
         (d.findViewById(android.R.id.message) as TextView).movementMethod =
             LinkMovementMethod.getInstance()
     }
-
-    companion object {
-        val toeflCategoryId = 1L
-    }
 }
