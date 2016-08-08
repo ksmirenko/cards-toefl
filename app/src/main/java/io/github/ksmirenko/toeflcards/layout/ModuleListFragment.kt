@@ -88,7 +88,7 @@ class ModuleListFragment : Fragment() {
 
     companion object {
         // Request code and arguments for CardActivity result
-        val RES_REQUEST_CODE = 1
+        private val RES_REQUEST_CODE = 1
         val RES_ARG_CARDS_UNANSWERED = "CARDS_UNANSWERED"
         val RES_ARG_CARDS_UNANSWERED_CNT = "CARDS_UNANSWERED_CNT"
         val RES_ARG_CARDS_TOTAL_CNT = "CARDS_TOTAL_CNT"

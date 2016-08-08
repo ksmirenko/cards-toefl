@@ -20,6 +20,7 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
         private val databaseVersionNumber = 1
         private val toeflCategoryId = 1L.toString()
 
+        private val trainingCardsCount = "10"
         private val collationString = " COLLATE UNICODE"
     }
 
@@ -96,6 +97,17 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
         ModuleEntry.COLUMN_NAME_CATEGORY_ID + "=?",
         arrayOf(toeflCategoryId),
         null, null, ModuleEntry.COLUMN_NAME_NAME + collationString)
+
+    /**
+     * Returns a Cursor to a specified number of random cards.
+     */
+    fun getTrainingCards(): Cursor = readableDatabase.query(
+        CardEntry.TABLE_NAME,
+        CardQuery.getQueryArg(),
+        null, null, null, null,
+        "RANDOM()",
+        trainingCardsCount
+    )
 
     /**
      * Saves user progress on a module.

@@ -20,4 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tablayout_main_screen"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_training"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_fitness_center_white_24dp"
+        app:fabSize="normal"/>
 </RelativeLayout>

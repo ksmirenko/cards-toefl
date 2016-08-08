@@ -132,6 +132,7 @@ class CardContainerFragment : Fragment() {
          */
         private var callbacks: Callbacks = dummyCallbacks
         private var isFrontFragment = false
+        private var isBackFirst = false
 
         @TargetApi(23)
         override fun onAttach(context: Context) {
@@ -155,9 +156,11 @@ class CardContainerFragment : Fragment() {
                                   savedInstanceState: Bundle?): View? {
             if (savedInstanceState == null) {
                 isFrontFragment = arguments.getBoolean(ARG_IS_FRONT)
+                isBackFirst = arguments.getBoolean(ARG_IS_BACK_FIRST)
             }
             else {
                 isFrontFragment = savedInstanceState.getBoolean(ARG_IS_FRONT)
+                isBackFirst = savedInstanceState.getBoolean(ARG_IS_BACK_FIRST)
             }
 
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
@@ -175,9 +178,9 @@ class CardContainerFragment : Fragment() {
                 )
                 button_cardview_know.setOnClickListener { callbacks.onCardButtonClicked(true) }
                 button_cardview_notknow.setOnClickListener { callbacks.onCardButtonClicked(false) }
-                // no "Don't know it" button on front side
+                // no "Don't know it" button on the side that the user sees first
                 button_cardview_notknow.visibility =
-                    if (isFrontFragment) View.GONE else View.VISIBLE
+                    if (isFrontFragment != isBackFirst) View.GONE else View.VISIBLE
                 icon_cardview_quit.setOnClickListener { callbacks.onQuitButtonClicked() }
             }
             return rootView
@@ -185,6 +188,7 @@ class CardContainerFragment : Fragment() {
 
         override fun onSaveInstanceState(outState: Bundle?) {
             outState?.putBoolean(ARG_IS_FRONT, isFrontFragment)
+            outState?.putBoolean(ARG_IS_BACK_FIRST, isBackFirst)
             super.onSaveInstanceState(outState)
         }
 
