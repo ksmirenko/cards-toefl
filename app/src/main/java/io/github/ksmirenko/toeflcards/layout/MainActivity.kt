@@ -1,6 +1,7 @@
 package io.github.ksmirenko.toeflcards.layout
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -10,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 
@@ -63,8 +65,11 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onPageSelected(position: Int) {
-                    if (position == 0)
+                    if (position == 0) {
+                        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                            .hideSoftInputFromWindow(windowToken, 0)
                         fabTraining.show()
+                    }
                     else
                         fabTraining.hide()
                 }

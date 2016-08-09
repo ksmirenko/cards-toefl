@@ -55,22 +55,26 @@ class DictionaryFragment : Fragment() {
 
         // setup searchView and associate searchable configuration
         val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = rootView.searchview_dictionary
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
-        searchView.setOnClickListener { searchView.isIconified = false }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String): Boolean {
-                adapter?.filter?.filter(newText)
-                adapter?.notifyDataSetChanged()
-                return true
+        with(rootView.searchview_dictionary) {
+            setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
+            setOnClickListener {
+                if (isIconified) isIconified = false
             }
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String): Boolean {
+                    adapter?.filter?.filter(newText)
+                    adapter?.notifyDataSetChanged()
+                    return true
+                }
 
-            override fun onQueryTextSubmit(query: String): Boolean {
-                adapter?.filter?.filter(query)
-                adapter?.notifyDataSetChanged()
-                return true
-            }
-        })
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    adapter?.filter?.filter(query)
+                    adapter?.notifyDataSetChanged()
+                    return true
+                }
+            })
+//            isIconified = true
+        }
 
         return rootView
     }
