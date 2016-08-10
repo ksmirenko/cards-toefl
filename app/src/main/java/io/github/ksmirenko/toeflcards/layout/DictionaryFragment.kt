@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CursorAdapter
@@ -57,8 +58,12 @@ class DictionaryFragment : Fragment() {
         val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         with(rootView.searchview_dictionary) {
             setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
-            setOnClickListener {
-                if (isIconified) isIconified = false
+            setOnTouchListener { view, motionEvent ->
+                if (motionEvent.action == MotionEvent.ACTION_DOWN && isIconified) {
+                    this.onActionViewExpanded()
+                    return@setOnTouchListener true
+                }
+                return@setOnTouchListener false
             }
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextChange(newText: String): Boolean {
@@ -73,7 +78,6 @@ class DictionaryFragment : Fragment() {
                     return true
                 }
             })
-//            isIconified = true
         }
 
         return rootView

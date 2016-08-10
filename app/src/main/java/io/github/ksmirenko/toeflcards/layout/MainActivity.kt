@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
         fabTraining = fab_training
         with(fabTraining) {
             setOnClickListener {
-                // TODO: launch training mode
-//                Toast.makeText(this@MainActivity, "Training!", Toast.LENGTH_SHORT).show()
                 // launch card view activity with a specific argument
                 val detailIntent = Intent(context, CardActivity::class.java)
                 detailIntent.putExtra(CardActivity.ARG_MODULE_ID, CardActivity.MODULE_ID_TRAINING)
