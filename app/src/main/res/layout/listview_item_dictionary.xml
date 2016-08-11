@@ -14,11 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_list_item_primary"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textContentPrimary"/>
     <TextView
             android:id="@+id/textview_listitem_dict_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_list_item_secondary"
-            android:textColor="@color/textSecondary"/>
+            android:textColor="@color/textContentSecondary"/>
 </LinearLayout>

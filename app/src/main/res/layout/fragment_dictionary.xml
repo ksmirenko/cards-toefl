@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/searchview_dictionary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:iconifiedByDefault="true"
+        android:maxWidth="10000dp"/>
+
+    <View
+        android:id="@+id/divider_dictionary"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/searchview_dictionary"
+        android:background="@color/divider"/>
+
+    <ListView
+        android:id="@+id/listview_dictionary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider_dictionary"
+        android:cacheColorHint="@android:color/transparent"
+        android:clickable="false"
+        android:listSelector="@android:color/transparent"/>
+</RelativeLayout>

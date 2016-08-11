@@ -24,7 +24,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.*
-
 import io.github.ksmirenko.toeflcards.R
 import kotlinx.android.synthetic.main.fragment_card.view.*
 
@@ -37,6 +36,8 @@ class CardContainerFragment : Fragment() {
         val ARG_FRONT_CONTENT = "front"
         val ARG_BACK_CONTENT = "back"
         val ARG_IS_BACK_FIRST = "backfirst"
+        val ARG_NUMBER_CURRENT = "curNumber"
+        val ARG_NUMBER_TOTAL = "totalNumber"
 
         val dummyCallbacks = DummyCallbacks()
     }
@@ -131,6 +132,7 @@ class CardContainerFragment : Fragment() {
          */
         private var callbacks: Callbacks = dummyCallbacks
         private var isFrontFragment = false
+        private var isBackFirst = false
 
         @TargetApi(23)
         override fun onAttach(context: Context) {
@@ -154,27 +156,39 @@ class CardContainerFragment : Fragment() {
                                   savedInstanceState: Bundle?): View? {
             if (savedInstanceState == null) {
                 isFrontFragment = arguments.getBoolean(ARG_IS_FRONT)
+                isBackFirst = arguments.getBoolean(ARG_IS_BACK_FIRST)
             }
             else {
                 isFrontFragment = savedInstanceState.getBoolean(ARG_IS_FRONT)
+                isBackFirst = savedInstanceState.getBoolean(ARG_IS_BACK_FIRST)
             }
 
             val rootView = inflater!!.inflate(R.layout.fragment_card, container, false)
-            val bgColorId = if (isFrontFragment) R.color.background else R.color.backgroundDark
-            rootView.setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, bgColorId))
-            val textView = rootView.textview_cardview_mainfield
-            textView.text = arguments.getString(
-                if (isFrontFragment) ARG_FRONT_CONTENT else ARG_BACK_CONTENT
-            )
-            rootView.button_cardview_know.setOnClickListener { callbacks.onCardButtonClicked(true) }
-            rootView.button_cardview_notknow.setOnClickListener { callbacks.onCardButtonClicked(false) }
-            val iconQuit = rootView.icon_cardview_quit
-            iconQuit.setOnClickListener { callbacks.onQuitButtonClicked() }
+            val bgColorId =
+                if (isFrontFragment)
+                    R.color.backgroundColoredLight
+                else
+                    R.color.backgroundColoredDark
+            with(rootView) {
+                setBackgroundColor(ContextCompat.getColor(CardActivity.appContext, bgColorId))
+                textview_cardview_progress.text =
+                    "${arguments.getInt(ARG_NUMBER_CURRENT)}/${arguments.getInt(ARG_NUMBER_TOTAL)}"
+                textview_cardview_mainfield.text = arguments.getString(
+                    if (isFrontFragment) ARG_FRONT_CONTENT else ARG_BACK_CONTENT
+                )
+                button_cardview_know.setOnClickListener { callbacks.onCardButtonClicked(true) }
+                button_cardview_notknow.setOnClickListener { callbacks.onCardButtonClicked(false) }
+                // no "Don't know it" button on the side that the user sees first
+                button_cardview_notknow.visibility =
+                    if (isFrontFragment != isBackFirst) View.GONE else View.VISIBLE
+                icon_cardview_quit.setOnClickListener { callbacks.onQuitButtonClicked() }
+            }
             return rootView
         }
 
         override fun onSaveInstanceState(outState: Bundle?) {
             outState?.putBoolean(ARG_IS_FRONT, isFrontFragment)
+            outState?.putBoolean(ARG_IS_BACK_FIRST, isBackFirst)
             super.onSaveInstanceState(outState)
         }
 
@@ -199,10 +213,13 @@ class CardContainerFragment : Fragment() {
         }
     }
 
-    private class CardGestureDetector(val onTapAction: () -> Unit) : GestureDetector.OnGestureListener {
-        override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean = false
+    private class CardGestureDetector(val onTapAction: () -> Unit)
+    : GestureDetector.OnGestureListener {
+        override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean =
+            false
 
-        override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean = false
+        override fun onFling(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean =
+            false
 
         override fun onShowPress(p0: MotionEvent?) {
         }

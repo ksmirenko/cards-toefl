@@ -18,6 +18,7 @@ object StringUtils {
         return sb.toString()
     }
 
+    @Suppress("unused")
     fun stringToIntList(str : String) : List<Int> {
         val arr = str.split(separator.toRegex()).dropLastWhile { it.isEmpty() }.map { it.toInt() }
         return arr

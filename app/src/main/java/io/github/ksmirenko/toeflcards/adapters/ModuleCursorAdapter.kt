@@ -10,7 +10,7 @@ import android.widget.CursorAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-import io.github.ksmirenko.toeflcards.FlexiDatabase
+import io.github.ksmirenko.toeflcards.ToeflCardsDatabase
 import io.github.ksmirenko.toeflcards.R
 import kotlinx.android.synthetic.main.listview_item_modules.view.*
 
@@ -35,8 +35,8 @@ class ModuleCursorAdapter(context : Context, cursor : Cursor?) : CursorAdapter(c
     }
 
     override fun bindView(view : View, context : Context, cursor : Cursor) {
-        val holder = view.tag as ModuleListItemViewHolder;
-        cursor.copyStringToBuffer(FlexiDatabase.ModuleQuery.COLUMN_INDEX_NAME, holder.nameBuffer)
+        val holder = view.tag as ModuleListItemViewHolder
+        cursor.copyStringToBuffer(ToeflCardsDatabase.ModuleQuery.COLUMN_INDEX_NAME, holder.nameBuffer)
         holder.nameView.setText(holder.nameBuffer.data, 0, holder.nameBuffer.sizeCopied)
         // set an icon, if available for this module
         try {
