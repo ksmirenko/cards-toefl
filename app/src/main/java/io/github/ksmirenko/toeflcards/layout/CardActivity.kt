@@ -33,7 +33,7 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
 
     private var moduleId: Long = 0
     private var cardsTotalCount: Int = 0
-    private var cardsUnansweredIds: ArrayList<Long>? = null
+    private lateinit var cardsUnansweredIds: ArrayList<Long>
 
     @SuppressWarnings("ConstantConditions")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,8 +76,8 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
             viewpager_card_container.adapter = pagerAdapter
             // initializing counters
             cardsTotalCount = cardCursor.count
-            cardsUnansweredIds = ArrayList<Long>()
         }
+        cardsUnansweredIds = ArrayList<Long>()
     }
 
     override fun onBackPressed() {
@@ -94,7 +94,7 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         // saving information about last viewed card
         if (!knowIt) {
             cardCursor.moveToPosition(position)
-            cardsUnansweredIds!!.add(cardCursor.getLong(COLUMN_INDEX))
+            cardsUnansweredIds.add(cardCursor.getLong(COLUMN_INDEX))
         }
         if (position + 1 >= cardsTotalCount) {
             saveAndExit(false)
@@ -114,18 +114,19 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
             // running till the end of cardCursor and adding all remaining cards to unanswered
             var hasRemainingCards = cardCursor.moveToPosition(viewpager_card_container.currentItem)
             while (hasRemainingCards) {
-                cardsUnansweredIds!!.add(cardCursor.getLong(COLUMN_INDEX))
+                cardsUnansweredIds.add(cardCursor.getLong(COLUMN_INDEX))
                 hasRemainingCards = cardCursor.moveToNext()
             }
         }
 
         // storing user result in an intent and closing the activity
-        val intent = Intent()
-        intent.putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED_CNT, cardsUnansweredIds!!.size)
-        intent.putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED, StringUtils.listToString(cardsUnansweredIds!!))
-        intent.putExtra(ModuleListFragment.RES_ARG_CARDS_TOTAL_CNT, cardsTotalCount)
-        intent.putExtra(ModuleListFragment.RES_ARG_MODULE_ID, moduleId)
-        setResult(Activity.RESULT_OK, intent)
+        with (Intent()) {
+            putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED_CNT, cardsUnansweredIds.size)
+            putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED, StringUtils.listToString(cardsUnansweredIds))
+            putExtra(ModuleListFragment.RES_ARG_CARDS_TOTAL_CNT, cardsTotalCount)
+            putExtra(ModuleListFragment.RES_ARG_MODULE_ID, moduleId)
+            this@CardActivity.setResult(Activity.RESULT_OK, this)
+        }
         finish()
     }
 
