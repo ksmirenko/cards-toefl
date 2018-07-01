@@ -17,11 +17,11 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper
 class ToeflCardsDatabase(context: Context, dbname: String) :
     SQLiteAssetHelper(context, dbname, null, databaseVersionNumber) {
     companion object {
-        private val databaseVersionNumber = 1
-        private val toeflCategoryId = 1L.toString()
+        private const val databaseVersionNumber = 1
+        private const val toeflCategoryId = 1L.toString()
 
-        private val trainingCardsCount = "10"
-        private val collationString = " COLLATE UNICODE"
+        private const val trainingCardsCount = "10"
+        private const val collationString = " COLLATE UNICODE"
     }
 
     /**
@@ -126,9 +126,9 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
      */
     class CardQuery {
         companion object {
-            val COLUMN_INDEX_ID = 0
-            val COLUMN_INDEX_FRONT = 1
-            val COLUMN_INDEX_BACK = 2
+            const val COLUMN_INDEX_ID = 0
+            const val COLUMN_INDEX_FRONT = 1
+            const val COLUMN_INDEX_BACK = 2
             fun getQueryArg() = arrayOf(CardEntry._ID, CardEntry.COLUMN_NAME_FRONT_CONTENT,
                 CardEntry.COLUMN_NAME_BACK_CONTENT)
 
@@ -142,7 +142,7 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
      */
     class ModuleQuery {
         companion object {
-            val COLUMN_INDEX_NAME = 1
+            const val COLUMN_INDEX_NAME = 1
             fun getNamesQueryArg() = arrayOf(ModuleEntry._ID, ModuleEntry.COLUMN_NAME_NAME)
         }
     }
@@ -152,11 +152,11 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
      */
     private class CardEntry : BaseColumns {
         companion object {
-            val _ID = BaseColumns._ID
-            val TABLE_NAME = "cards"
-            val COLUMN_NAME_CATEGORY_ID = "cardCatId"
-            val COLUMN_NAME_FRONT_CONTENT = "front"
-            val COLUMN_NAME_BACK_CONTENT = "back"
+            const val _ID = BaseColumns._ID
+            const val TABLE_NAME = "cards"
+            const val COLUMN_NAME_CATEGORY_ID = "cardCatId"
+            const val COLUMN_NAME_FRONT_CONTENT = "front"
+            const val COLUMN_NAME_BACK_CONTENT = "back"
         }
     }
 
@@ -165,12 +165,12 @@ class ToeflCardsDatabase(context: Context, dbname: String) :
      */
     private class ModuleEntry : BaseColumns {
         companion object {
-            val _ID = BaseColumns._ID
-            val TABLE_NAME = "modules"
-            val COLUMN_NAME_CATEGORY_ID = "moduleCatId"
-            val COLUMN_NAME_NAME = "moduleName"
-            val COLUMN_NAME_CARDS = "moduleCards" // this one is actually an array, so we'll have to decode it
-            val COLUMN_NAME_UNANSWERED = "moduleUnanswred" // and this one
+            const val _ID = BaseColumns._ID
+            const val TABLE_NAME = "modules"
+            const val COLUMN_NAME_CATEGORY_ID = "moduleCatId"
+            const val COLUMN_NAME_NAME = "moduleName"
+            const val COLUMN_NAME_CARDS = "moduleCards" // this one is actually an array, so we'll have to decode it
+            const val COLUMN_NAME_UNANSWERED = "moduleUnanswred" // and this one
         }
     }
 }

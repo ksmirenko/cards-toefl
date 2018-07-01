@@ -24,6 +24,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.*
+import android.widget.FrameLayout
 import io.github.ksmirenko.toeflcards.R
 import kotlinx.android.synthetic.main.fragment_card.view.*
 
@@ -33,11 +34,11 @@ import kotlinx.android.synthetic.main.fragment_card.view.*
 class CardContainerFragment : Fragment() {
     companion object {
         // arguments
-        val ARG_FRONT_CONTENT = "front"
-        val ARG_BACK_CONTENT = "back"
-        val ARG_IS_BACK_FIRST = "backfirst"
-        val ARG_NUMBER_CURRENT = "curNumber"
-        val ARG_NUMBER_TOTAL = "totalNumber"
+        const val ARG_FRONT_CONTENT = "front"
+        const val ARG_BACK_CONTENT = "back"
+        const val ARG_IS_BACK_FIRST = "backfirst"
+        const val ARG_NUMBER_CURRENT = "curNumber"
+        const val ARG_NUMBER_TOTAL = "totalNumber"
 
         val dummyCallbacks = DummyCallbacks()
     }
@@ -59,7 +60,7 @@ class CardContainerFragment : Fragment() {
             val prefs = activity.getSharedPreferences(HINT_PREFS_NAME, 0)
             if (prefs.getBoolean(HINT_PREFS_NAME, true)) {
                 showHintFragment()
-                prefs.edit().putBoolean(HINT_PREFS_NAME, false).commit()
+                prefs.edit().putBoolean(HINT_PREFS_NAME, false).apply()
             }
             else {
                 // put card fragment for the first time
@@ -75,8 +76,8 @@ class CardContainerFragment : Fragment() {
 
         // adding event handler
         val gestureDetector = GestureDetector(activity, CardGestureDetector(flip))
-        val layout = rootView.findViewById(R.id.layout_card_container)
-        layout.setOnTouchListener { view, motionEvent ->
+        val layout: FrameLayout = rootView.findViewById(R.id.layout_card_container)
+        layout.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
         }
 
@@ -193,7 +194,7 @@ class CardContainerFragment : Fragment() {
         }
 
         companion object {
-            val ARG_IS_FRONT = "isFrontFragment"
+            const val ARG_IS_FRONT = "isFrontFragment"
         }
     }
 

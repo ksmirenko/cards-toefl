@@ -6,7 +6,7 @@ package io.github.ksmirenko.toeflcards
  * @author Kirill Smirenko
  */
 object StringUtils {
-    private val separator = "_,_"
+    private const val separator = "_,_"
 
     fun <T> listToString(list : List<T>) : String {
         val sb = StringBuilder()

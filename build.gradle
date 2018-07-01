@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.3'
+        classpath 'com.android.tools.build:gradle:3.1.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -12,13 +13,18 @@ buildscript {
 
 allprojects {
     ext {
-        gradle_version = '2.14.0'
-        kotlin_version = '1.0.3'
-        android_build_tools_version = '24.0.1'
-        android_support_version = '24.2.0'
+        toeflcards_version = '1.0.1'
+
+        gradle_version = '4.4'
+        kotlin_version = '1.2.50'
+        android_build_tools_version = '27.0.3'
+        android_support_version = '27.1.1'
+        sqliteasset_version = '2.0.1'
+        kovenant_version = '3.3.0'
     }
 
     repositories {
-        mavenCentral()
+        jcenter()
+        google()
     }
 }

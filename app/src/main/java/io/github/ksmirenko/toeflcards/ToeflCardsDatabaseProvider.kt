@@ -8,7 +8,7 @@ import android.content.Context
  * @author Kirill Smirenko
  */
 object ToeflCardsDatabaseProvider {
-    private val dbFilename = "toeflcards.db"
+    private const val dbFilename = "toeflcards.db"
 
     private var database : ToeflCardsDatabase? = null
 

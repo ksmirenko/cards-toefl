@@ -50,14 +50,13 @@ class DictionaryFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        val rootView = inflater!!.inflate(R.layout.fragment_dictionary, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_dictionary, container, false)
 
         // setup searchView and associate searchable configuration
-        val searchManager = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         with(rootView.searchview_dictionary) {
-            setSearchableInfo(searchManager.getSearchableInfo(activity.componentName))
+            setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
             setOnTouchListener { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_DOWN && isIconified) {
                     this.onActionViewExpanded()
