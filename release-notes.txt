@@ -1,0 +1,9 @@
+Version 1.0.1
+Date: 21.10.2018
+* Upgraded target SDK version to 28
+* Minor fixes and improvements
+
+-----------------------------------------------------------
+Version 1.0.0
+Date: 18.08.2018
++ First major release.
