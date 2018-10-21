@@ -14,17 +14,15 @@ buildscript {
     }
 }
 
-defaultTasks "build"
-
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion android_build_tools_version
 
     defaultConfig {
         applicationId "io.github.ksmirenko.toeflcards"
         minSdkVersion 17
-        targetSdkVersion 27
-        versionCode 1
+        targetSdkVersion 28
+        versionCode 2
         versionName toeflcards_version
     }
     buildTypes {
