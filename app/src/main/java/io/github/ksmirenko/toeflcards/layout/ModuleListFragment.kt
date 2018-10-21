@@ -29,21 +29,20 @@ class ModuleListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ToeflCardsDatabaseProvider.initIfNull(context)
+        ToeflCardsDatabaseProvider.initIfNull(context!!)
         // load the list of modules in background thread
         val db = ToeflCardsDatabaseProvider.db
         task {
             db.getModules()
         } successUi {
             cursor ->
-            modulesAdapter = ModuleCursorAdapter(context, cursor)
+            modulesAdapter = ModuleCursorAdapter(context!!, cursor)
             setupListAdapter()
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val rootView = inflater!!.inflate(R.layout.fragment_modules_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_modules_list, container, false)
         moduleListView = rootView.listview_modules
 
         // filling the list with modules and setting up onClick
@@ -88,10 +87,10 @@ class ModuleListFragment : Fragment() {
 
     companion object {
         // Request code and arguments for CardActivity result
-        private val RES_REQUEST_CODE = 1
-        val RES_ARG_CARDS_UNANSWERED = "CARDS_UNANSWERED"
-        val RES_ARG_CARDS_UNANSWERED_CNT = "CARDS_UNANSWERED_CNT"
-        val RES_ARG_CARDS_TOTAL_CNT = "CARDS_TOTAL_CNT"
-        val RES_ARG_MODULE_ID = "MODULE_ID"
+        private const val RES_REQUEST_CODE = 1
+        const val RES_ARG_CARDS_UNANSWERED = "CARDS_UNANSWERED"
+        const val RES_ARG_CARDS_UNANSWERED_CNT = "CARDS_UNANSWERED_CNT"
+        const val RES_ARG_CARDS_TOTAL_CNT = "CARDS_TOTAL_CNT"
+        const val RES_ARG_MODULE_ID = "MODULE_ID"
     }
 }

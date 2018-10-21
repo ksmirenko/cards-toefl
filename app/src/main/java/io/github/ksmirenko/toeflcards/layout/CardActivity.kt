@@ -61,10 +61,10 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         val db = ToeflCardsDatabaseProvider.db
         task {
             cardCursor =
-                if (isTraining)
-                    db.getTrainingCards()
-                else
-                    db.getModuleCards(moduleId, isRandom, isUnansweredOnly)
+                    if (isTraining)
+                        db.getTrainingCards()
+                    else
+                        db.getModuleCards(moduleId, isRandom, isUnansweredOnly)
         } then {
             if (!isTraining && isUnansweredOnly && cardCursor.count == 0) {
                 cardCursor = db.getModuleCards(moduleId, isRandom, false)
@@ -98,8 +98,7 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         }
         if (position + 1 >= cardsTotalCount) {
             saveAndExit(false)
-        }
-        else {
+        } else {
             viewpager_card_container.setCurrentItem(position + 1, true)
         }
     }
@@ -120,7 +119,7 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         }
 
         // storing user result in an intent and closing the activity
-        with (Intent()) {
+        with(Intent()) {
             putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED_CNT, cardsUnansweredIds.size)
             putExtra(ModuleListFragment.RES_ARG_CARDS_UNANSWERED, StringUtils.listToString(cardsUnansweredIds))
             putExtra(ModuleListFragment.RES_ARG_CARDS_TOTAL_CNT, cardsTotalCount)
@@ -134,18 +133,18 @@ class CardActivity : AppCompatActivity(), CardContainerFragment.Callbacks {
         /**
          * Intent argument
          */
-        val ARG_MODULE_ID = "module_id"
+        const val ARG_MODULE_ID = "module_id"
 
         /**
          * The value that should be passed as ARG_MODULE_ID when loading a training
          * instead of a module.
          */
-        val MODULE_ID_TRAINING = -2L
+        const val MODULE_ID_TRAINING = -2L
 
         /**
          * Context for the fragments to work normally.
          */
-        var appContext: Context? = null
+        lateinit var appContext: Context
             private set
     }
 }
